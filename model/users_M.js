@@ -16,6 +16,12 @@ return row[0];
     
 }
 
+async function deleteById(id) {
+    let sql = `DELETE FROM users WHERE id=${id}`;
+    let [row] = await db.query(sql);
+    return row[0];
+}
+
 module.exports = {
-    getAll,getById,
+    getAll,getById,deleteById,
 }

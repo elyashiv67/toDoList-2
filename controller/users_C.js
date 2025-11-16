@@ -1,4 +1,4 @@
-const {getAll,getById,} = require('../model/users_M.js');
+const {getAll,getById,deleteById,} = require('../model/users_M.js');
 
 
 
@@ -28,6 +28,20 @@ async function getUser(req,res) {
    }
 }
 
+async function deleteUser(req,res) {
+   try {
+   let user = await deleteById(req.id);
+   console.log(user);
+      if(!user){
+         res.status(400).json({message:'no user found'});
+      }
+      res.status(200).json({message:'ok'});
+   } catch (err) {
+      res.status(500).json({message:"err"});
+   }
+
+}
+
 module.exports={
-    getAllUsers,getUser,
+    getAllUsers,getUser,deleteUser,
 }
