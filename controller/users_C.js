@@ -30,14 +30,14 @@ async function getUser(req,res) {
 
 async function deleteUser(req,res) {
    try {
-   let user = await deleteById(req.id);
-   console.log(user);
-      if(!user){
+   let affectedRows = await deleteById(req.id);
+   console.log(affectedRows);
+      if(!affectedRows){
          res.status(400).json({message:'no user found'});
       }
-      res.status(200).json({message:'ok'});
+      res.status(200).json({message:'deleted'});
    } catch (err) {
-      res.status(500).json({message:"err"});
+      res.status(500).json({message:"server error"});
    }
 
 }
