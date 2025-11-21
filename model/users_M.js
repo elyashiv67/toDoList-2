@@ -10,9 +10,9 @@ async function getAll(){
 }
 
 async function getById(id) {
-let sql = `SELECT id,name,email FROM users WHERE id = ${id}`;
-let [row] = await db.query(sql);
-return row[0];
+    let sql = `SELECT id,name,email FROM users WHERE id = ?`;
+    let [row] = await db.query(sql, [id]);
+    return row[0];
     
 }
 
@@ -23,6 +23,19 @@ async function deleteById(id) {
     return result.affectedRows;
 }
 
+async function patchUser(id,user) {
+    let keys = Object.keys(user);
+    console.log(keys);
+    let values = Object.values(user);
+    console.log(values);
+    let set = keys.map(k=>`${k}=?`).join(',');
+    let sql = `UPDATE users SET ${set} WHERE id = ?`;
+    console.log(sql);
+     
+    let [result] = await db.query(sql,[...values,id]);
+    return result.affectedRows;
+}
+
 module.exports = {
-    getAll,getById,deleteById,
+    getAll,getById,deleteById,patchUser
 }

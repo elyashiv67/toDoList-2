@@ -7,5 +7,25 @@ function ValidId(req,res,next){
  next();
 }
 
+function valuesToEdit(req,res,next){
+   let obj = {};
+   if(req.body.name){
+      obj.name = req.body.name;
+   }
+   if(req.body.email){
+      obj.email = req.body.email;
+   }
+   if(req.body.userName){
+      obj.user_name = req.body.userName;
+   }
 
-module.exports = {ValidId,}
+   let keys = Object.keys(obj);
+   if(keys.length === 0){
+      return res.status(400).json({message:"there is no data"});
+   }
+   req.user = obj;
+   next();
+}
+
+
+module.exports = {ValidId,valuesToEdit}
