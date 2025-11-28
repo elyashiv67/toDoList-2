@@ -13,7 +13,8 @@ async function encryptPass(req,res,next){
     console.log(pass);
     let hashPass = await bcrypt.hash(pass,10)
     console.log(hashPass);
-    req.body.pass = hashPass;
+    req.pass = hashPass;
+    req.user = {...req.body, pass:hashPass};
     next();
 }
 
