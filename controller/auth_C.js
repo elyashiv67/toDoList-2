@@ -1,4 +1,6 @@
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken'); // creats and verifies tokens that are sent to the client and helps us to know which user is making the request 
+// and if he is authorized to make this request
 
 const {addUserDb , getByUserName, getByEmail ,} = require('../model/auth_M.js');
 
@@ -20,7 +22,7 @@ async function addUser(req,res) {
         res.status(500).json({message:"Server error"})
     }
 }
-async function login(req,res) {
+async function login(req,res,next) {
     try{ 
         const user = await getByUserName(req.body.userName);
         if(!user){
@@ -30,13 +32,34 @@ async function login(req,res) {
         if(!isMatch){
             return res.status(400).json({message:"user name or password is incorrect"});
         }
-        res.status(200).json({message:"Login successful"});
+        req.user = user;
+        next();
 
     }catch(err){
         res.status(500).json({message:"Server error"})
     }
 }
 
+
+async function createJwt(req,res){ 
+    try {
+        let token = await jwt.sign({         // create the token, first param is the payload (data to store in the token like user id and user name)
+            id: req.user.id,                 // second param is the secret key to sign the token and i wrote it in .env file
+            userName: req.user.user_name     // third param is options like expiration time
+            },
+            process.env.SECRET_KEY,
+            {expiresIn: '3h'}
+        );
+        console.log(token);   
+        res.status(200).json({message:"Login successful"}); 
+        
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({message:"server error"});
+    }
+    
+}
+
 module.exports ={
-    addUser, login,
+    addUser, login, createJwt
 }
