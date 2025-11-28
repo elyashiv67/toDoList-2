@@ -8,6 +8,14 @@ function valuesToAdd(req,res,next){
     next();
 }
 
+function valuesToLogin(req,res,next){
+    let {userName,pass} = req.body;
+    if(!userName || !pass){
+        return res.status(400).json({message:'all fields are required'});
+    }
+    next();
+}
+
 async function encryptPass(req,res,next){
     let pass = req.body.pass
     console.log(pass);
@@ -18,4 +26,4 @@ async function encryptPass(req,res,next){
     next();
 }
 
-module.exports = {valuesToAdd,encryptPass};
+module.exports = {valuesToAdd,encryptPass , valuesToLogin};
