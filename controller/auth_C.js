@@ -51,7 +51,12 @@ async function createJwt(req,res){
             {expiresIn: '3h'}
         );
         console.log(token);   
-        res.status(200).json({message:"Login successful"}); 
+        res.cookie('jwt',token,{            //cookie dosent work we need to fix it
+            maxAge:1000*60*60*3,
+            httpOnly:true,
+            sameSite:'lax',
+            secure:true
+        }).status(200).json({message:"Login successful"}); 
         
     } catch (err) {
         console.log(err);
