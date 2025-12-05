@@ -41,9 +41,9 @@ async function login(req,res,next) {
 }
 
 
-async function createJwt(req,res){ 
+function createJwt(req,res){ 
     try {
-        let token = await jwt.sign({         // create the token, first param is the payload (data to store in the token like user id and user name)
+        let token =  jwt.sign({         // create the token, first param is the payload (data to store in the token like user id and user name)
             id: req.user.id,                 // second param is the secret key to sign the token and i wrote it in .env file
             userName: req.user.user_name     // third param is options like expiration time
             },
@@ -51,7 +51,7 @@ async function createJwt(req,res){
             {expiresIn: '3h'}
         );
         console.log(token);   
-        res.cookie('jwt',token,{            //cookie dosent work we need to fix it
+        res.cookie('jwt',token,{
             maxAge:1000*60*60*3,
             httpOnly:true,
             sameSite:'lax',

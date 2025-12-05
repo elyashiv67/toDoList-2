@@ -7,6 +7,7 @@ const port = process.env.PORT ;
 const api = process.env.HOST;
 const db = require('./config/db_config');
 app.use(express.json());
+app.use(cookies());
 
 app.use(express.static(path.join(__dirname,'public')));
 app.use(express.json());
