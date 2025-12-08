@@ -28,10 +28,7 @@ async function encryptPass(req,res,next){
 }
 
 function isLoggedIn(req,res,next){
-    console.log(12);
     const token = req.cookies.jwt;
-    console.log(token);
-    
     if(!token){
         return res.status(401).json({message:"please log in"});
     }
@@ -43,7 +40,6 @@ function isLoggedIn(req,res,next){
     } catch (error) {
         res.status(500).json({message:"server error"});
     }
-
 }
 
 module.exports = {valuesToAdd,

@@ -17,6 +17,7 @@ app.use(express.json());
 app.get('/',(req,res)=>{res.sendFile(__dirname + '/public/index.html')});
 app.use('/users',require('./routers/users_R'));
 app.use('/auth',require('./routers/auth_R'));
+app.use('/categories',require('./routers/categories_R'));
 
 
 
