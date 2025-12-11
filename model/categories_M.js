@@ -7,6 +7,12 @@ async function getAll(){
     return rows;
 }
 
+async function getById(id) {
+    const sql = "SELECT name FROM categories WHERE id = ?";
+    const [row] = await db.query(sql, [id]); 
+    return row[0];
+}
+
 async function add({name,user_id}) {
     const sql = "INSERT INTO categories( name, user_id) VALUES (?,?)";
     const [result] = await db.query(sql, [name, user_id]); 
@@ -14,8 +20,17 @@ async function add({name,user_id}) {
     return result.insertId;
 }
 
+async function deleteC(id) {
+    const sql = "DELETE FROM categories WHERE id = ?";
+    const [result] = await db.query(sql, [id]); 
+    console.log(result);
+    return result.affectedRows;
+}
+
 
 module.exports = {
     getAll,
-    add
+    getById,
+    add,
+    deleteC  
 }
