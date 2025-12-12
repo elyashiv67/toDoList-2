@@ -7,8 +7,10 @@ function valuesToAdd(req,res,next){
     if(!name){
         return res.status(400).json({message:'all fields are required'});
     }
+    req.name = name;
     next();
 }
+
 function ValidId(req,res,next){
     try {
         
