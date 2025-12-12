@@ -2,10 +2,11 @@ const {getAll,add,deleteC,getById} = require('../model/categories_M.js');
 
 async function getAllCategories(req,res) {
  try {
-    let categories = await getAll();
+    let user_id = req.user.id;
+    let categories = await getAll(user_id);
     
     if(categories.length == 0){
-      res.status(400).json({message:'no data'});
+      res.status(400).json({message:'no categories found'});
     }
     res.status(200).json(categories);
  } catch (err) {
@@ -15,7 +16,10 @@ async function getAllCategories(req,res) {
 
 async function getCategory(req,res) {
     try {
-       let category = await getById(req.id);
+       let user_id = req.user.id;
+       console.log(user_id);
+       
+       let category = await getById(req.id , user_id);
        if(!category){
           res.status(400).json({message:'no category found'});
        }
@@ -40,7 +44,8 @@ async function addCategory(req,res) {
 
 async function deleteCategory(req,res) {
     try {
-        await deleteC(req.id);
+        let user_id = req.user.id;
+        let category = await deleteC(req.id , user_id);
         res.status(200).json({message:'deleted'});
         
     } catch (error) {
