@@ -34,7 +34,7 @@ async function addTask(req,res) {
         let user_id = req.user.id;
         let taskName = req.name;
         let taskDesc = req.desc;
-        let category_id = req.category_id;
+        let category_id = req.category_id || null;
         let task = await add(taskName , taskDesc , category_id , user_id);
         if(!task){
             return res.status(400).json({message:'task not added'});
