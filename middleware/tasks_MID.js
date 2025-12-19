@@ -28,6 +28,22 @@ function ValidId(req,res,next){
     }
 }
 
+function ValuesToEdit(req,res,next){
+    let obj = {};
+    if(req.body.name){
+        obj.name = req.body.name;
+    }
+    if(req.body.description){
+        obj.description = req.body.description;
+    }
+    if(req.body.isDone){
+        obj.isDone = req.body.isDone;
+    }
+    req.values = obj;
+    next();
+}
+
 module.exports = {ValidId,
     ValidValues,
+    ValuesToEdit,
 };

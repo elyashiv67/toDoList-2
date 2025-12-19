@@ -1,4 +1,4 @@
-const {getAll,getById , add} = require('../model/tasks_M.js');
+const {getAll,getById , add , delete_task , patchTask} = require('../model/tasks_M.js');
 
 async function getAllTasks(req,res) {
     try {
@@ -46,5 +46,39 @@ async function addTask(req,res) {
     }
 }
 
+async function deleteT(req,res){
+    try {
+        let TaskID = req.params.id;
+        let user_id = req.user.id;
+        const Task = await delete_task(TaskID,user_id);
+        if(!Task){
+            res.status(400).json({message:"not deleted"})
+        }
+        res.status(200).json({message:"deleted"});
+    } catch (err) {
+        res.status(500).json({message:"server error"});
+    }
+    
+}
 
-module.exports={getAllTasks , getTask , addTask};
+
+async function updateTask(req,res) {
+    try {
+        let user_id = req.user.id;
+        let taskId = req.params.id;
+        let values = req.values;
+        let task = await patchTask(taskId,user_id,values);
+        console.log(task);
+        
+        if(!task){
+            res.status(400).json({message:"not updated"});
+        }
+        res.status(200).json({message:"updated"});
+
+    } catch (err) {
+        res.status(500).json({message:"server error"});
+    }
+}
+
+
+module.exports={getAllTasks , getTask , addTask , deleteT , updateTask};

@@ -20,8 +20,30 @@ async function add(name , description , category_id , user_id) {
     return result.insertId;
 }
 
+async function delete_task(id, user_id) {
+    const sql = "DELETE FROM tasks WHERE id = ? and user_id = ?";
+    const [result] = await db.query(sql, [id , user_id]); 
+    console.log(result);
+    return result.affectedRows;
+}
+
+async function patchTask(taskId, user_id, task) {
+    let keys = Object.keys(task);
+    console.log(keys);
+    let values = Object.values(task);
+    console.log(values);
+    let set = keys.map(k=>`${k}=?`).join(',');
+    let sql = `UPDATE tasks SET ${set} WHERE id = ? and user_id = ?`;
+    console.log(sql);
+     
+    let [result] = await db.query(sql,[...values,taskId,user_id]);
+    return result.affectedRows;
+}
+
 module.exports= {
     getAll,
     getById,
-    add
+    add,
+    delete_task,
+    patchTask
 };

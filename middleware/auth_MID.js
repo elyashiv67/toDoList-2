@@ -34,7 +34,6 @@ function isLoggedIn(req,res,next){
     }
     try {
         const payload = jwt.verify(token,process.env.SECRET_KEY);
-        console.log(payload);
         req.user = payload;
         next();
     } catch (error) {

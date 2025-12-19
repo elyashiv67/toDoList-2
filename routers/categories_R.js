@@ -6,8 +6,8 @@ const {valuesToAdd , ValidId} = require('../middleware/categories_MID.js');
 
 router.get('/',isLoggedIn,getAllCategories);
 router.get('/:id',isLoggedIn,ValidId,getCategory);
-router.post('/add',isLoggedIn ,valuesToAdd ,addCategory);
-router.delete('/delete/:id',isLoggedIn,ValidId,deleteCategory);
-router.patch('/edit/:id',isLoggedIn,ValidId,valuesToAdd,editCategory);
+router.post('/',isLoggedIn ,valuesToAdd ,addCategory);
+router.delete('/:id',isLoggedIn,ValidId,deleteCategory);
+router.patch('/:id',isLoggedIn,ValidId,valuesToAdd,editCategory);
 
 module.exports = router;
