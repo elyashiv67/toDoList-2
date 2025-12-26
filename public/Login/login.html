@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <title>Login</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -30,7 +30,6 @@
             margin: 0;
             background: var(--bg-gradient);
             color: var(--text-main);
-            padding: 1rem;
         }
 
         .login-wrapper {
@@ -39,7 +38,7 @@
             border-radius: 1rem;
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
             width: 100%;
-            max-width: 450px;
+            max-width: 400px;
             animation: slideIn 0.5s ease-out;
         }
 
@@ -71,12 +70,12 @@
         }
 
         .input-group {
-            margin-bottom: 1.25rem;
+            margin-bottom: 1.5rem;
         }
 
         label {
             display: block;
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.5rem;
             color: var(--text-main);
             font-size: 0.875rem;
             font-weight: 500;
@@ -109,86 +108,50 @@
             font-weight: 600;
             cursor: pointer;
             transition: background-color 0.2s ease;
-            margin-top: 1rem;
             font-family: inherit;
         }
 
         button:hover {
             background-color: var(--primary-hover);
         }
-
-        .login-link {
-            text-align: center;
-            margin-top: 1.5rem;
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-        }
-
-        .login-link a {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .login-link a:hover {
-            text-decoration: underline;
-        }
     </style>
 </head>
 
 <body>
     <div class="login-wrapper">
-        <h1>Create Account</h1>
-        <p class="subtitle">Join us today! Enter your details below.</p>
-
-        <div class="input-group">
-            <label for="name">Full Name</label>
-            <input type="text" id="name" name="name" placeholder="e.g. John Doe" required>
-        </div>
+        <h1>Login</h1>
+        <p class="subtitle">Please enter your details to sign in.</p>
 
         <div class="input-group">
             <label for="username">Username</label>
-            <input type="text" id="username" name="username" placeholder="Choose a username" required>
-        </div>
-
-        <div class="input-group">
-            <label for="email">Email Address</label>
-            <input type="email" id="email" name="email" placeholder="name@example.com" required>
+            <input type="text" id="username" name="username" placeholder="Enter your username" required>
         </div>
 
         <div class="input-group">
             <label for="password">Password</label>
-            <input type="password" id="password" name="password" placeholder="Create a strong password" required>
+            <input type="password" id="password" name="password" placeholder="••••••••" required>
         </div>
 
-        <button onclick="register()">Register</button>
-
-        <div class="login-link">
-            Already have an account? <a href="/login">Log in</a>
-        </div>
+        <button onclick="login()">Sign In</button>
     </div>
 
     <script>
-        async function register() {
-            const name = document.getElementById("name").value;
+        async function login() {
             const username = document.getElementById("username").value;
-            const email = document.getElementById("email").value;
             const password = document.getElementById("password").value;
 
-            if (!name || !username || !email || !password) {
-                alert("Please fill in all fields");
+            if (!username || !password) {
+                alert("Please fill in both fields");
                 return;
             }
 
             let formData = {
-                name: name,
                 userName: username,
-                email: email,
                 pass: password
             };
 
             try {
-                let response = await fetch("/auth/reg", {
+                let response = await fetch("/auth/login", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
@@ -198,20 +161,19 @@
                 console.log(response);
 
                 if (response.ok) {
-                    alert("Registration successful!");
-                    window.location.href = "/"; // Redirect to home or login page
-                    return;
+                    // Success animation or feedback could go here
+                    alert("Login successful!");
+                    window.location.href = "/Home";
                 } else {
                     const errorData = await response.json();
-                    alert("Registration failed: " + (errorData.message || "Unknown error"));
+                    alert("Login failed: " + (errorData.message || "Unknown error"));
                 }
             } catch (error) {
-                console.error("Register Error:", error);
-                alert("An error occurred during registration.");
-                return;
+                console.error("Login Error:", error);
+                alert("An error occurred while trying to login.");
             }
 
-            console.log("register attempt finished");
+            console.log("login attempt finished");
         }
     </script>
 </body>
