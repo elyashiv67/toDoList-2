@@ -1,0 +1,194 @@
+        :root {
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --secondary: #ec4899;
+            --secondary-hover: #db2777;
+            --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --surface: #ffffff;
+            --text-main: #111827;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: var(--bg-gradient);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            max-width: 500px;
+            width: 90%;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin: 0 0 1rem 0;
+            letter-spacing: -0.05em;
+        }
+
+        p {
+            font-size: 1.125rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary {
+            background-color: white;
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            background-color: #f9fafb;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+        /* --- Add this to your existing CSS --- */
+
+/* 1. Scrollable Container for Tasks */
+#showTasks {
+    width: 100%;
+    max-height: 50vh; /* Keeps it contained within the screen */
+    overflow-y: auto; /* Adds scroll if list is long */
+    margin-top: 2rem;
+    padding-right: 0.5rem; /* Space for scrollbar */
+}
+
+/* Custom "Glass" Scrollbar */
+#showTasks::-webkit-scrollbar {
+    width: 6px;
+}
+#showTasks::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+}
+
+/* 2. List Reset */
+.list-group {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* 3. The Task Card */
+.list-group-item {
+    background: rgba(255, 255, 255, 0.05); /* Very subtle glass layer */
+    border: 1px solid rgba(255, 255, 255, 0.15); /* Thin frost border */
+    border-radius: 1rem;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    text-align: left; /* Text aligns left for readability */
+    
+    /* Grid Layout to organize the elements */
+    display: grid;
+    grid-template-columns: 1fr auto; /* Text takes space | Checkbox takes auto */
+    gap: 0.5rem;
+    
+    transition: transform 0.2s ease, background 0.2s;
+}
+
+/* Hover Effect for Cards */
+.list-group-item:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* 4. Task Title */
+.list-group-item h5 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: white;
+    grid-column: 1; /* Left side */
+}
+
+/* 5. Checkbox Positioning */
+.list-group-item input[type="checkbox"] {
+    grid-column: 2; /* Right side */
+    grid-row: 1;    /* Top row */
+    align-self: center;
+    /* Your inline styles handle the color/size */
+}
+
+/* 6. Description (Overrides global p styles) */
+.list-group-item p {
+    grid-column: 1 / -1; /* Spans full width */
+    font-size: 0.95rem;
+    margin: 0.5rem 0; /* Override the large global margin */
+    opacity: 0.8;
+    line-height: 1.4;
+}
+
+/* 7. Category Label */
+.list-group-item div {
+    grid-column: 1 / -1;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 0.25rem;
+}
+/* --- COMPLETED TASKS STYLING --- */
+
+/* 1. Dim the whole card and add a subtle green tint */
+.list-group-item.done {
+    opacity: 0.6;
+    background: rgba(0, 210, 106, 0.1); /* Faint green matching your checkbox */
+    border-color: rgba(0, 210, 106, 0.3); /* Greenish border */
+    transition: all 0.3s ease;
+}
+
+/* 2. Strike-through the title and description */
+.list-group-item.done h5,
+.list-group-item.done p {
+    text-decoration: line-through;
+    color: rgba(255, 255, 255, 0.6); /* Make text duller */
+}
+
+/* 3. Keep the checkbox fully visible/active */
+.list-group-item.done input {
+    opacity: 1; 
+}

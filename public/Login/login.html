@@ -161,8 +161,9 @@
                 console.log(response);
 
                 if (response.ok) {
+                    let greetedUser = "hello " + username;
                     // Success animation or feedback could go here
-                    alert("Login successful!");
+                    alert("Login successful! " + greetedUser);
                     window.location.href = "/Home";
                 } else {
                     const errorData = await response.json();
