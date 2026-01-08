@@ -66,8 +66,33 @@ function selectCategoryOptions() {
             optionsHTML += `<option value="${category.id}">${category.name}</option>`;
         }
     }
+    optionsHTML += '<option value="0">All Categories</option>';
     select.innerHTML = optionsHTML;
 }
+
+async function filterTasksByCategory() {
+    try {
+        const selectedCategoryId = document.getElementById("selectCategories").value;
+        const response = await fetch('/tasks');
+        const tasks = await response.json();
+        if (selectedCategoryId === "0") {
+        createTasks(tasks);
+        return;
+    }
+    console.log(tasks);
+    
+        const filteredTasks = tasks.filter(task => 
+        task.category_id == selectedCategoryId
+    );
+    console.log(filteredTasks);
+    
+    createTasks(filteredTasks);
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+document.getElementById("selectCategories").addEventListener("change", filterTasksByCategory);
 
 fetchCategories();
 
