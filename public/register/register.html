@@ -199,7 +199,7 @@
 
                 if (response.ok) {
                     alert("Registration successful!");
-                    window.location.href = "/"; // Redirect to home or login page
+                    window.location.href = "/login"; // Redirect to login page
                     return;
                 } else {
                     const errorData = await response.json();

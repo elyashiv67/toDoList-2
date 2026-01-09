@@ -1,4 +1,22 @@
+
 let allCategories = [];
+let allTasks = [];
+
+function createTask(task) {
+    let isDone = (task.isDone) ? "checked" : "";
+    let doneClass = (task.isDone) ? "done" : ""; 
+    let taskHtml = `
+            <li class="list-group-item ${doneClass}">
+                <h5>${task.name}</h5>
+                <p>${task.description}</p>
+                <input type="checkbox" ${isDone} style="accent-color: #00d26a; transform: scale(1.5); cursor: pointer;"> 
+                <div id="deleteTask" onclick="deleteTask(${task.id})"><i class="fa-regular fa-trash-can fa-xl"></i></div>
+                <div>category: ${allCategories[task.category_id]?.name || "No Category"}</div>
+            </li>
+        `;
+    return taskHtml;
+
+}
 
 function createTasks(data) {
     const tasksContainer = document.getElementById("showTasks");
@@ -8,18 +26,7 @@ function createTasks(data) {
     }
     let tasksHTML = '<ul class="list-group">';
     data.forEach(task => {
-        
-        let isDone = (task.isDone) ? "checked" : "";
-        let doneClass = (task.isDone) ? "done" : ""; 
-
-        tasksHTML += `
-            <li class="list-group-item ${doneClass}">
-                <h5>${task.name}</h5>
-                <p>${task.description}</p>
-                <input type="checkbox" ${isDone} style="accent-color: #00d26a; transform: scale(1.5); cursor: pointer;"> 
-                <div>category: ${allCategories[task.category_id]?.name || "No Category"}</div>
-            </li>
-        `;
+        tasksHTML += createTask(task);
     });
     tasksHTML += '</ul>';
     tasksContainer.innerHTML = tasksHTML;
@@ -32,6 +39,7 @@ async function fetchTasks() {
             return;
         }
         const data = await response.json();
+        allTasks = data;
         createTasks(data);
         } catch (err) {
         console.log(err);
@@ -57,31 +65,29 @@ async function fetchCategories() {
         console.log(err);
         }
 }
-function selectCategoryOptions() {
-    const select = document.getElementById("selectCategories");
+function selectCategoryOptions(tagID) {
+    const select = document.getElementById(tagID || "selectCategories");
     let optionsHTML = '<option value="">Select Category</option>';
+    optionsHTML += '<option value="0">All Categories</option>';
 
     for (let category of allCategories) {
         if (category) {
             optionsHTML += `<option value="${category.id}">${category.name}</option>`;
         }
     }
-    optionsHTML += '<option value="0">All Categories</option>';
     select.innerHTML = optionsHTML;
 }
 
 async function filterTasksByCategory() {
     try {
         const selectedCategoryId = document.getElementById("selectCategories").value;
-        const response = await fetch('/tasks');
-        const tasks = await response.json();
         if (selectedCategoryId === "0") {
-        createTasks(tasks);
+        createTasks(allTasks);
         return;
     }
-    console.log(tasks);
-    
-        const filteredTasks = tasks.filter(task => 
+    console.log(allTasks);
+
+        const filteredTasks = allTasks.filter(task => 
         task.category_id == selectedCategoryId
     );
     console.log(filteredTasks);
@@ -92,9 +98,63 @@ async function filterTasksByCategory() {
     }
 }
 
+async function deleteTask(id) {
+    try {
+        const response = await fetch(`/tasks/${id}`, {
+            method: "DELETE"
+        });
+        console.log(response);
+        if (response.ok) {
+            fetchTasks();
+        }
+    } catch (err) {
+        console.log(err);
+    }
+}
+
 document.getElementById("selectCategories").addEventListener("change", filterTasksByCategory);
 
 fetchCategories();
 
+function addTaskShow(){
+    const inputContainer = document.getElementById("inputContainer");
+    inputContainer.classList.toggle("inputContainer-overlay-visible");
+    selectCategoryOptions("taskCategoryIn"); 
+    
+}
+
+function closeInputContainer(e){
+    const inputContainer = document.getElementById("inputContainer");
+    if(e.target=== inputContainer){
+    inputContainer.classList.toggle("inputContainer-overlay-visible");
+    }
+}
+
+async function addTask(){
+    try {
+        let name = document.getElementById("taskName").value;
+        let description = document.getElementById("taskDescription").value;
+        let category_id = Number(document.getElementById("taskCategoryIn").value);
+        
+        const response = await fetch('/tasks', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name: name,
+                description: description,
+                category_id: category_id
+            })
+        });
+        if (response.ok) {
+            
+            fetchTasks();
+            document.getElementById("inputContainer").classList.remove("inputContainer-overlay-visible");
+        }
+    } catch (err) {
+        console.log(err);
+    }
+}
 
 window.onload = fetchTasks;

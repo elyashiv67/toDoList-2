@@ -12,6 +12,7 @@ function ValidValues(req,res,next){
     }
     req.name = name;
     req.desc = description;
+    req.category_id = category_id;
     next();
 }
 

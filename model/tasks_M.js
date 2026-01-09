@@ -1,7 +1,7 @@
 const db = require('../config/db_config');
 
 async function getAll(user_id) {
-    let sql = 'SELECT  name, description, isDone, user_id, category_id FROM tasks WHERE user_id = ?';
+    let sql = 'SELECT  id , name, description, isDone, user_id, category_id FROM tasks WHERE user_id = ?';
     let [rows] = await db.query(sql, [user_id]);
     console.log(rows);
     return rows;

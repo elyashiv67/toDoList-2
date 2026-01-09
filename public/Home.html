@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ToDo List App | Welcome</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/js/all.min.js"></script>
     <link rel="stylesheet" href="./styles.css">
 </head>
 
@@ -16,10 +17,23 @@
             <a href="/login" class="btn btn-primary">Login</a>
             <a href="/reg" class="btn btn-secondary">Register</a>
         </div>
-        <select id="selectCategories">filter categories</select>
+        <div class="task-options">
+            <div onclick="addTaskShow()"><i class="fa-regular fa-square-plus fa-xl"></i></div>
+            <select id="selectCategories">filter categories</select>
+        </div>
         <div id="showTasks"></div>
-        
-
+    </div>
+    <div class="inputContainer-overlay-hidden" id="inputContainer" onclick="closeInputContainer(event)">
+        <div class="inputContainer-content">
+            <h2>Add New Task</h2>
+            <input type="number" value="" id="taskID" hidden>
+            <input type="text" id="taskName" placeholder="Task Name">
+            <input type="text" id="taskDescription" placeholder="Task Description">
+            <select id="taskCategoryIn">
+                <option value="0">Select Category</option>
+            </select>
+        <button id="addTaskBtn" class="btn btn-primary" onclick="addTask()">Add Task</button>
+        </div>
     </div>
 
     <script src="./script.js"></script>
