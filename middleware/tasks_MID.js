@@ -40,6 +40,9 @@ function ValuesToEdit(req,res,next){
     if(req.body.isDone){
         obj.isDone = req.body.isDone;
     }
+    if(req.body.category_id !== undefined){
+        obj.category_id = req.body.category_id;
+    }
     let keys = Object.keys(obj);
     if(keys.length == 0){
         return res.status(400).json({message:'at least one field is required'});
