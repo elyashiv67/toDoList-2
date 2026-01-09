@@ -1,197 +1,198 @@
-        :root {
-            --primary: #4f46e5;
-            --primary-hover: #4338ca;
-            --secondary: #ec4899;
-            --secondary-hover: #db2777;
-            --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --surface: #ffffff;
-            --text-main: #111827;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: var(--bg-gradient);
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            text-align: center;
-        }
-
-        .container {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 3rem;
-            border-radius: 1.5rem;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            max-width: 500px;
-            width: 90%;
-        }
-
-        h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            margin: 0 0 1rem 0;
-            letter-spacing: -0.05em;
-        }
-
-        p {
-            font-size: 1.125rem;
-            margin-bottom: 2.5rem;
-            opacity: 0.9;
-            line-height: 1.6;
-        }
-
-        .actions {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 0.75rem 2rem;
-            border-radius: 9999px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.2s ease;
-            font-size: 1rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn-primary {
-            background-color: white;
-            color: var(--primary);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            background-color: #f9fafb;
-        }
-
-        .btn-secondary {
-            background-color: transparent;
-            border: 2px solid white;
-            color: white;
-        }
-
-        .btn-secondary:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
-        }
-        /* --- Add this to your existing CSS --- */
-
-/* 1. Scrollable Container for Tasks */
-#showTasks {
-    width: 100%;
-    max-height: 50vh; /* Keeps it contained within the screen */
-    overflow-y: auto; /* Adds scroll if list is long */
-    margin-top: 2rem;
-    padding-right: 0.5rem; /* Space for scrollbar */
+:root {
+    /* Primary Accent (Medium Teal) */
+    --primary: rgb(18, 153, 144);
+    
+    /* Background Gradient: Dark Teal to Medium Teal */
+    --bg-gradient: linear-gradient(135deg, rgb(9, 107, 104) 0%, rgb(18, 153, 144) 100%);
+    
+    /* Surface / Text Color (Cream) */
+    --surface: rgb(255, 251, 222);
+    
+    /* Secondary Accent (Light Teal) */
+    --secondary: rgb(144, 209, 202);
 }
 
-/* Custom "Glass" Scrollbar */
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: var(--bg-gradient);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--surface); /* Cream Text */
+    text-align: center;
+}
+
+.container {
+    /* Cream Glass Effect */
+    background: rgba(255, 251, 222, 0.1); 
+    backdrop-filter: blur(10px);
+    padding: 3rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    max-width: 500px;
+    width: 90%;
+}
+
+h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin: 0 0 1rem 0;
+    letter-spacing: -0.05em;
+    color: var(--surface);
+}
+
+p {
+    font-size: 1.125rem;
+    margin-bottom: 2.5rem;
+    opacity: 0.9;
+    line-height: 1.6;
+}
+
+.actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 0.75rem 2rem;
+    border-radius: 9999px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    font-size: 1rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary {
+    background-color: var(--surface); /* Cream Button */
+    color: rgb(9, 107, 104);          /* Dark Teal Text */
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    background-color: rgb(144, 209, 202); /* Light Teal Hover */
+    color: rgb(9, 107, 104);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    border: 2px solid var(--surface); /* Cream Border */
+    color: var(--surface);
+}
+
+.btn-secondary:hover {
+    background-color: rgba(255, 251, 222, 0.1);
+    transform: translateY(-2px);
+}
+
+/* --- Tasks List --- */
+
+#showTasks {
+    width: 100%;
+    max-height: 50vh;
+    overflow-y: auto;
+    margin-top: 2rem;
+    padding-right: 0.5rem;
+}
+
 #showTasks::-webkit-scrollbar {
     width: 6px;
 }
 #showTasks::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 251, 222, 0.3); /* Cream scrollbar */
     border-radius: 3px;
 }
 
-/* 2. List Reset */
 .list-group {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-/* 3. The Task Card */
 .list-group-item {
-    background: rgba(255, 255, 255, 0.05); /* Very subtle glass layer */
-    border: 1px solid rgba(255, 255, 255, 0.15); /* Thin frost border */
+    /* Cream Glass Background */
+    background: rgba(255, 251, 222, 0.05); 
+    border: 1px solid rgba(255, 251, 222, 0.15); 
     border-radius: 1rem;
     padding: 1.25rem;
     margin-bottom: 1rem;
-    text-align: left; /* Text aligns left for readability */
+    text-align: left;
     
-    /* Grid Layout to organize the elements */
     display: grid;
-    grid-template-columns: 1fr auto; /* Text takes space | Checkbox takes auto */
+    grid-template-columns: 1fr auto;
     gap: 0.5rem;
     
     transition: transform 0.2s ease, background 0.2s;
 }
 
-/* Hover Effect for Cards */
 .list-group-item:hover {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 251, 222, 0.15);
     transform: translateY(-2px);
-    border-color: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 251, 222, 0.3);
 }
 
-/* 4. Task Title */
 .list-group-item h5 {
     margin: 0;
     font-size: 1.25rem;
     font-weight: 700;
-    color: white;
-    grid-column: 1; /* Left side */
+    color: var(--surface);
+    grid-column: 1;
 }
 
-/* 5. Checkbox Positioning */
 .list-group-item input[type="checkbox"] {
-    grid-column: 2; /* Right side */
-    grid-row: 1;    /* Top row */
+    grid-column: 2;
+    grid-row: 1;
     align-self: center;
-    /* Your inline styles handle the color/size */
+    accent-color: var(--secondary); /* Light Teal Checkbox */
 }
 
-/* 6. Description (Overrides global p styles) */
 .list-group-item p {
-    grid-column: 1 / -1; /* Spans full width */
+    grid-column: 1 / -1;
     font-size: 0.95rem;
-    margin: 0.5rem 0; /* Override the large global margin */
+    margin: 0.5rem 0;
     opacity: 0.8;
     line-height: 1.4;
+    color: var(--surface);
 }
 
-/* 7. Category Label */
 .list-group-item div {
     grid-column: 1 / -1;
     font-size: 0.75rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--secondary); /* Light Teal Category Label */
     margin-top: 0.25rem;
 }
+
 /* --- COMPLETED TASKS STYLING --- */
 
-/* 1. Dim the whole card and add a subtle green tint */
 .list-group-item.done {
     opacity: 0.6;
-    background: rgba(0, 210, 106, 0.1); /* Faint green matching your checkbox */
-    border-color: rgba(0, 210, 106, 0.3); /* Greenish border */
+    background: rgba(9, 107, 104, 0.4); /* Dark Teal Background */
+    border-color: rgba(18, 153, 144, 0.5); 
     transition: all 0.3s ease;
 }
 
-/* 2. Strike-through the title and description */
 .list-group-item.done h5,
 .list-group-item.done p {
     text-decoration: line-through;
-    color: rgba(255, 255, 255, 0.6); /* Make text duller */
+    color: rgba(255, 251, 222, 0.6); 
 }
 
-/* 3. Keep the checkbox fully visible/active */
 .list-group-item.done input {
     opacity: 1; 
 }
+
+/* --- OVERLAY --- */
+
 .inputContainer-overlay-hidden {
     display: none;
 }
@@ -203,13 +204,36 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    /* Dark Teal Overlay */
+    background-color: rgba(9, 107, 104, 0.85); 
     backdrop-filter: blur(5px);
     z-index: 10;
     border-radius: 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
+    color: var(--surface);
     font-size: 1.5rem;
+}
+
+/* Ensure inputs inside overlay match the theme */
+.inputContainer {
+    background-color: rgb(255, 251, 222); /* Cream Box */
+    color: rgb(9, 107, 104); /* Dark Text inside box */
+    /* Add padding/radius if missing in HTML structure */
+    padding: 2rem;
+    border-radius: 1rem;
+}
+
+/* Style inputs inside the modal to match */
+.inputContainer input, 
+.inputContainer select {
+    background: rgba(144, 209, 202, 0.2);
+    border: 1px solid rgb(18, 153, 144);
+    color: rgb(9, 107, 104);
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    width: 100%;
+    margin-bottom: 1rem;
+    box-sizing: border-box; /* Fix width issues */
 }
