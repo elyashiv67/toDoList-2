@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {isLoggedIn} = require('../middleware/auth_MID.js');
+const {isLoggedIn , isAdmin} = require('../middleware/auth_MID.js');
 const {getAllTasks , getTask , addTask , deleteT , updateTask} = require('../controller/tasks_C.js');
 const { ValidValues,ValidId , ValuesToEdit} = require('../middleware/tasks_MID.js');
 const { valuesToEdit } = require('../middleware/users_MID.js');

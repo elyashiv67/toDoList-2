@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const {checkAdmin} = require('../model/auth_M.js');
 
 function valuesToAdd(req,res,next){
     let {name,email,userName,pass} = req.body;
@@ -41,8 +42,27 @@ function isLoggedIn(req,res,next){
     }
 }
 
+
+async function isAdmin(req,res,next){
+    const user = req.user;
+    if(!user){
+        return res.status(401).json({message:"please log in"});
+    }
+    try {
+        let isAdmin = await checkAdmin(user.id);
+        console.log(isAdmin);
+        if(!isAdmin){
+            return  res.status(403).json({message:"access denied"});
+        }
+        next();
+    } catch (error) {
+        res.status(500).json({message:"server error"});
+    }
+}
+
 module.exports = {valuesToAdd,
     encryptPass,
     valuesToLogin,
     isLoggedIn,
+    isAdmin
     };

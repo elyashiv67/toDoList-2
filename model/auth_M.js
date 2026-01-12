@@ -22,7 +22,14 @@ async function getByEmail(email) {
     const [rows] = await db.query(sql, [email]);
     return rows[0];
 }
+
+async function checkAdmin(user_id){
+    const sql = "SELECT is_admin FROM users WHERE id = ?";
+    const [rows] = await db.query(sql, [user_id]);
+    console.log(rows);
+    return rows[0]?.is_admin === 1;
+}
 module.exports = {
-    addUserDb, getByUserName, getByEmail ,
+    addUserDb, getByUserName, getByEmail , checkAdmin
 };
     
