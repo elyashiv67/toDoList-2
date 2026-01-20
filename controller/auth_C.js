@@ -55,7 +55,7 @@ function createJwt(req,res){
             maxAge:1000*60*60*3,
             httpOnly:true,
             sameSite:'lax',
-            secure:true
+            secure:false
         }).status(200).json({message:"Login successful"}); 
         
     } catch (err) {

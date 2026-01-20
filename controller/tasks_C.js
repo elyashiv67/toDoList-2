@@ -3,6 +3,7 @@ const {getAll,getById , add , delete_task , patchTask} = require('../model/tasks
 async function getAllTasks(req,res) {
     try {
         let user_id = req.user.id;
+        // let user_id = req.params.id;
         let Tasks = await getAll(user_id);
     
     if(Tasks.length == 0){

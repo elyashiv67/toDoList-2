@@ -4,7 +4,7 @@ let allTasks = [];
 
 function createTask(task) {
     let isDone = (task.isDone) ? "checked" : "";
-    let doneClass = (task.isDone) ? "done" : ""; 
+    let doneClass = (task.isDone) ? "done" : "";
     let taskHtml = `
             <li class="list-group-item ${doneClass}">
                 <h5>${task.name}</h5>
@@ -21,7 +21,7 @@ function createTask(task) {
 
 function createTasks(data) {
     const tasksContainer = document.getElementById("showTasks");
-    if(!data || data.length === 0){
+    if (!data || data.length === 0) {
         tasksContainer.innerHTML = "<p>No tasks available.</p>";
         return;
     }
@@ -35,36 +35,36 @@ function createTasks(data) {
 async function fetchTasks() {
     try {
         const response = await fetch('/tasks');
-        if (!response.ok) {
-            window.location.href = "/login";
-            return;
-        }
+        // if (!response.ok) {
+        //     window.location.href = "/login";
+        //     return;
+        // }
         const data = await response.json();
         allTasks = data;
         createTasks(data);
-        } catch (err) {
+    } catch (err) {
         console.log(err);
-        
-        }
+
+    }
 }
 
 async function fetchCategories() {
     try {
         const response = await fetch('/categories');
-        if (!response.ok) {
-            window.location.href = "/login";
-            return;
-        }
+        // if (!response.ok) {
+        //     window.location.href = "/login";
+        //     return;
+        // }
         const data = await response.json();
-        
+
         for (let category of data) {
             allCategories[category.id] = category;
         }
-        
+
         selectCategoryOptions();
-        } catch (err) {
+    } catch (err) {
         console.log(err);
-        }
+    }
 }
 function selectCategoryOptions(tagID) {
     const select = document.getElementById(tagID || "selectCategories");
@@ -83,17 +83,17 @@ async function filterTasksByCategory() {
     try {
         const selectedCategoryId = document.getElementById("selectCategories").value;
         if (selectedCategoryId === "0") {
-        createTasks(allTasks);
-        return;
-    }
-    console.log(allTasks);
+            createTasks(allTasks);
+            return;
+        }
+        console.log(allTasks);
 
-        const filteredTasks = allTasks.filter(task => 
-        task.category_id == selectedCategoryId
-    );
-    console.log(filteredTasks);
-    
-    createTasks(filteredTasks);
+        const filteredTasks = allTasks.filter(task =>
+            task.category_id == selectedCategoryId
+        );
+        console.log(filteredTasks);
+
+        createTasks(filteredTasks);
     } catch (err) {
         console.log(err);
     }
@@ -117,7 +117,7 @@ document.getElementById("selectCategories").addEventListener("change", filterTas
 
 fetchCategories();
 
-function addTaskShow(){
+function addTaskShow() {
     const inputContainer = document.getElementById("inputContainer");
     inputContainer.classList.toggle("inputContainer-overlay-visible");
     document.getElementById("addTaskBtn").innerHTML = "Add Task";
@@ -125,23 +125,23 @@ function addTaskShow(){
     document.getElementById("taskID").value = 0;
     document.getElementById("taskName").value = "";
     document.getElementById("taskDescription").value = "";
-    selectCategoryOptions("taskCategoryIn"); 
-    
+    selectCategoryOptions("taskCategoryIn");
+
 }
 
-function closeInputContainer(e){
+function closeInputContainer(e) {
     const inputContainer = document.getElementById("inputContainer");
-    if(e.target=== inputContainer){
-    inputContainer.classList.toggle("inputContainer-overlay-visible");
+    if (e.target === inputContainer) {
+        inputContainer.classList.toggle("inputContainer-overlay-visible");
     }
 }
 
-async function addTask(){
+async function addTask() {
     try {
         let name = document.getElementById("taskName").value;
         let description = document.getElementById("taskDescription").value;
         let category_id = Number(document.getElementById("taskCategoryIn").value);
-        
+
         const response = await fetch('/tasks', {
             method: "POST",
             headers: {
@@ -154,7 +154,7 @@ async function addTask(){
             })
         });
         if (response.ok) {
-            
+
             fetchTasks();
             document.getElementById("inputContainer").classList.remove("inputContainer-overlay-visible");
         }
@@ -163,7 +163,7 @@ async function addTask(){
     }
 }
 
-function openEditTask(id){
+function openEditTask(id) {
     const inputContainer = document.getElementById("inputContainer");
     inputContainer.classList.toggle("inputContainer-overlay-visible");
     selectCategoryOptions("taskCategoryIn");
@@ -176,13 +176,13 @@ function openEditTask(id){
     document.getElementById("taskCategoryIn").value = task.category_id || "";
 }
 
-async function editTask(){
+async function editTask() {
     try {
         let id = document.getElementById("taskID").value;
         let name = document.getElementById("taskName").value;
         let description = document.getElementById("taskDescription").value;
         let category_id = Number(document.getElementById("taskCategoryIn").value);
-        if(category_id === 0){
+        if (category_id === 0) {
             category_id = null;
         }
         const response = await fetch(`/tasks/${id}`, {
@@ -205,11 +205,11 @@ async function editTask(){
     }
 }
 
-function inputBtnHandler(){
+function inputBtnHandler() {
     let btn = document.getElementById("addTaskBtn");
-    if(btn.value == 0){
+    if (btn.value == 0) {
         addTask();
-    }else{
+    } else {
         editTask();
     }
 }
