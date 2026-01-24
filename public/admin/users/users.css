@@ -5,3 +5,14 @@
 tr>td{
     padding: 1rem 2rem;
 }
+#topRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+#topRow h1 {
+    flex: 1; /* Allows h1 to take remaining space and center itself */
+    text-align: center;
+}

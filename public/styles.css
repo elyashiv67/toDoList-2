@@ -172,6 +172,13 @@ p {
     border-color: rgba(255, 251, 222, 0.3);
 }
 
+#deleteUser:hover, #editUser:hover {
+    background: rgba(255, 251, 222, 0.15);
+    transform: translateY(-2px);
+    transform: scale(1.2);
+    border-color: rgba(255, 251, 222, 0.3);
+}
+
 .list-group-item input[type="checkbox"] {
     grid-column: 2;
     grid-row: 1;

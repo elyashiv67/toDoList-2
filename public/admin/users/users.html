@@ -13,10 +13,15 @@
 
 <body>
     <div class="container">
-        <h1>Users Management</h1>
+        <div id="topRow">
+           <a href="../../Home.html" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+           <h1>Users Management</h1>
+           <div id="addUserTopRow" class="btn btn-secondary" onclick="addUserShow()">add user <i class="fa-regular fa-square-plus fa-xl"></i></div>
+        </div>
+        
         <div class="inputContainer-overlay-hidden" id="inputContainer" onclick="closeInputContainer(event)">
         <div class="inputContainer-content">
-            <h2>Add New User</h2>
+            <h2 id="containerTitle">Add New User</h2>
             <input type="number" value="" id="userID" hidden>
             <input type="text" id="name" placeholder="your name">
             <input type="text" id="userName" placeholder="User Name">
@@ -30,7 +35,7 @@
             <button id="addUserBtn" class="btn btn-primary" onclick="inputBtnHandler()">Add User</button>
         </div>
     </div>
-    <div onclick="addUserShow()"><i class="fa-regular fa-square-plus fa-xl"></i></div>
+
         <table>
             <thead>
                 <tr>
@@ -43,7 +48,6 @@
                 </tr>
             </thead>
             <tbody id="usersTableBody">
-                <!-- User rows will be populated here -->
             </tbody>
         </table>
 

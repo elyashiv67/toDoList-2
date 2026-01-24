@@ -18,6 +18,9 @@ function valuesToEdit(req,res,next){
    if(req.body.userName){
       obj.user_name = req.body.userName;
    }
+   if(req.body.is_admin !== undefined && req.body.is_admin !== null){
+      obj.is_admin = req.body.is_admin;
+   }
 
    let keys = Object.keys(obj);
    if(keys.length === 0){

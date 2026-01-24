@@ -4,7 +4,7 @@ const {checkAdmin} = require('../model/auth_M.js');
 
 function valuesToAdd(req,res,next){
     let {name,email,userName,pass,is_admin} = req.body;
-    if(!name || !email || !userName || !pass || !is_admin){
+    if(!name || !email || !userName || !pass || is_admin === undefined || is_admin === null){
         return res.status(400).json({message:'all fields are required'});
     }
     next();
@@ -55,6 +55,7 @@ function isLoggedIn(req,res,next){
 
 async function isAdmin(req,res,next){
     const user = req.user;
+    console.log(user);
     if(!user){
         return res.status(401).json({message:"please log in"});
     }

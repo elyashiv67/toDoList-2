@@ -6,11 +6,9 @@ const { isLoggedIn, isAdmin } = require('../middleware/auth_MID.js');
 
 
 router.get('/', isLoggedIn, isAdmin, getAllUsers);
-router.get('/:id', ValidId, isAdmin, getUser);
-router.delete('/:id', ValidId, isAdmin, deleteUser);
-router.patch('/:id', ValidId, isAdmin, valuesToEdit, updateUser)
-
-
+router.get('/:id', isLoggedIn, ValidId, isAdmin, getUser);
+router.delete('/:id', isLoggedIn, ValidId, isAdmin, deleteUser);
+router.patch('/:id', isLoggedIn, ValidId, isAdmin, valuesToEdit, updateUser)
 
 
 

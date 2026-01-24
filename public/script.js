@@ -35,10 +35,10 @@ function createTasks(data) {
 async function fetchTasks() {
     try {
         const response = await fetch('/tasks');
-        // if (!response.ok) {
-        //     window.location.href = "/login";
-        //     return;
-        // }
+        if (!response.ok) {
+            window.location.href = "/login";
+            return;
+        }
         const data = await response.json();
         allTasks = data;
         createTasks(data);
