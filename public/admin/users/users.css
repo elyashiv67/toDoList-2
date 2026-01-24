@@ -1,0 +1,7 @@
+.actionsTd{
+    display: flex;
+    gap: 1rem;
+}
+tr>td{
+    padding: 1rem 2rem;
+}

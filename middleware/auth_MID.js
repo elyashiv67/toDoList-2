@@ -3,8 +3,8 @@ const jwt = require('jsonwebtoken');
 const {checkAdmin} = require('../model/auth_M.js');
 
 function valuesToAdd(req,res,next){
-    let {name,email,userName,pass} = req.body;
-    if(!name || !email || !userName || !pass){
+    let {name,email,userName,pass,is_admin} = req.body;
+    if(!name || !email || !userName || !pass || !is_admin){
         return res.status(400).json({message:'all fields are required'});
     }
     next();
@@ -36,6 +36,16 @@ function isLoggedIn(req,res,next){
     try {
         const payload = jwt.verify(token,process.env.SECRET_KEY);
         req.user = payload;
+
+        // req.user = { //for dev only
+        // id: 20,
+        // name: 'ari',
+        // email: 'ari@ar1',
+        // user_name: 'ariUser1',
+        // pass: '$2b$10$JEGmGK3rj1.P.nUCJGOiiO8iDROC9tMb5jhR8CNeJ2FlCxV0xEs0a',
+        // is_admin: 1
+        // };
+
         next();
     } catch (error) {
         res.status(500).json({message:"server error"});

@@ -10,11 +10,11 @@ app.use(express.json());
 app.use(cookies());
 // const frontURL = "http://localhost:5173";
 //     const cors = require('cors');
-// app.use(cors());
-    // app.use(cors({
-    //     origin: frontURL, // Specify exact origin, not wildcard *
-    //     credentials: true // Allow credentials
-    // }));
+//     app.use(cors());
+//     app.use(cors({
+//         origin: frontURL, // Specify exact origin, not wildcard *
+//         credentials: true // Allow credentials
+//     }));
 
 app.use(express.static(path.join(__dirname,'public')));
 app.use(express.json());

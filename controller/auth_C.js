@@ -33,6 +33,15 @@ async function login(req,res,next) {
             return res.status(400).json({message:"user name or password is incorrect"});
         }
         req.user = user;
+        // req.user = { //for dev only
+        // id: 20,
+        // name: 'ari',
+        // email: 'ari@ar1',
+        // user_name: 'ariUser1',
+        // pass: '$2b$10$JEGmGK3rj1.P.nUCJGOiiO8iDROC9tMb5jhR8CNeJ2FlCxV0xEs0a',
+        // is_admin: 1
+        // };
+
         next();
 
     }catch(err){

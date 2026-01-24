@@ -1,8 +1,8 @@
 const db = require('../config/db_config');
 
-async function addUserDb({name,email,userName,pass}) { 
-    const sql = "INSERT INTO users( name, email, user_name, pass) VALUES (?,?,?,?)";
-    const [result] = await db.query(sql, [name, email, userName, pass]); 
+async function addUserDb({name,email,userName,pass,is_admin}) { 
+    const sql = "INSERT INTO users( name, email, user_name, pass, is_admin) VALUES (?,?,?,?,?)";
+    const [result] = await db.query(sql, [name, email, userName, pass, is_admin]); 
     console.log(result);
     return result.insertId;
 }

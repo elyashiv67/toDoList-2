@@ -17,19 +17,101 @@ function renderUsers(users) {
     usersList.innerHTML = ``;
     users.forEach(user => {
         let role = 'User';
-        if (user.role === true){
+        if (user.is_admin === 1) {
             role = 'Admin';
         }
         usersList.innerHTML += `
         <tr>
-            <td>${user.id}</td>
-            <td>${user.username}</td>
+            <td>${user.name}</td>
+            <td>${user.user_name}</td>
+            <td>${user.pass}</td>
             <td>${user.email}</td>
             <td>${role}</td>
+            <td class="actionsTd">
+            <div id="deleteUser" onclick="deleteUser(${user.id})"><i class="fa-regular fa-trash-can fa-xl"></i></div>
+                <div id="editTask" onclick="openEditTask(${user.id})"><i class="fa-regular fa-pen-to-square fa-xl"></i></div>
+            </td>
         </tr>
         `;
     });
 }
+
+
+async function deleteUser(userId) {
+    try {
+        const response = await fetch(`/users/${userId}`, {
+            method: 'DELETE'
+        });
+        if (response.ok) {
+            fetchUsers(); // Refresh the user list
+        } else {
+            console.log('Failed to delete user');
+        }
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+function addUserShow() {
+    const inputContainer = document.getElementById("inputContainer");
+    inputContainer.classList.toggle("inputContainer-overlay-visible");
+    document.getElementById("addUserBtn").innerHTML = "Add User";
+    document.getElementById("addUserBtn").value = 0;
+    document.getElementById("userID").value = 0;
+    document.getElementById("name").value = "";
+    document.getElementById("userName").value = "";
+    document.getElementById("userEmail").value = "";
+    document.getElementById("userPassword").value = "";
+
+}
+function closeInputContainer(e) {
+    const inputContainer = document.getElementById("inputContainer");
+    if (e.target === inputContainer) {
+        inputContainer.classList.toggle("inputContainer-overlay-visible");
+    }
+}
+
+async function addUser() {
+    try {
+        let name = document.getElementById("name").value;
+        let userName = document.getElementById("userName").value;
+        let email = document.getElementById("userEmail").value;
+        let password = document.getElementById("userPassword").value;
+        let role = Number(document.getElementById("userRole").value);
+
+        const response = await fetch('/auth/reg', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name: name,
+                email: email,
+                userName: userName,
+                pass: password,
+                is_admin: role
+            })
+        });
+        if (response.ok) {
+
+            fetchUsers();
+            document.getElementById("inputContainer").classList.remove("inputContainer-overlay-visible");
+        }
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+function inputBtnHandler() {
+    let btn = document.getElementById("addUserBtn");
+    if (btn.value == 0) {
+        addUser();
+    } else {
+        editUser();
+    }
+}
+
+
 window.onload = () => {
     fetchUsers();
 };

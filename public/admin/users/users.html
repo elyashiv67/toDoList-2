@@ -1,19 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>users</title>
-    <link rel="stylesheet" href="../../styles.css">    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/js/all.min.js"></script>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="./users.css">
 </head>
+
 <body>
     <div class="container">
         <h1>Users Management</h1>
+        <div class="inputContainer-overlay-hidden" id="inputContainer" onclick="closeInputContainer(event)">
+        <div class="inputContainer-content">
+            <h2>Add New User</h2>
+            <input type="number" value="" id="userID" hidden>
+            <input type="text" id="name" placeholder="your name">
+            <input type="text" id="userName" placeholder="User Name">
+            <input type="text" id="userEmail" placeholder="User Email">
+            <input type="text" id="userPassword" placeholder="User Password">
+            <select id="userRole" required>
+                <option value="">Select Role</option>
+                <option value="1">Admin</option>
+                <option value="0">User</option>
+            </select>
+            <button id="addUserBtn" class="btn btn-primary" onclick="inputBtnHandler()">Add User</button>
+        </div>
+    </div>
+    <div onclick="addUserShow()"><i class="fa-regular fa-square-plus fa-xl"></i></div>
         <table>
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <th>NAME</th>
                     <th>Username</th>
+                    <th>Pass</th>
                     <th>Email</th>
                     <th>Role</th>
                     <th>Actions</th>
@@ -28,4 +51,5 @@
 
         <script src="./users.js"></script>
 </body>
+
 </html>
