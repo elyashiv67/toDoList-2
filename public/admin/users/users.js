@@ -70,7 +70,7 @@ function addUserShow() {
 }
 function closeInputContainer(e) {
     const inputContainer = document.getElementById("inputContainer");
-    if (!e.target.closest('.inputContainer')) {
+    if (e.target === inputContainer) {
         inputContainer.classList.toggle("inputContainer-overlay-visible");
     }
 }

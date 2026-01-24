@@ -55,6 +55,56 @@ p {
     opacity: 0.9;
     line-height: 1.6;
 }
+input{
+    background: transparent;
+    border: 2px solid var(--surface);
+    color: var(--surface);
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+}
+input::placeholder {
+    color: var(--surface)
+}
+
+select {
+    background: transparent;
+    border: 2px solid var(--surface);
+    color: var(--surface);
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    width: fit-content;
+    box-sizing: border-box;
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem; /* Space for arrow */
+    transition: all 0.3s ease; /* Smooth transitions */
+    cursor: pointer;
+}
+
+/* Hover and focus for select */
+select:hover, select:focus {
+    border-color: rgb(9, 107, 104);
+    background: rgba(144, 209, 202, 0.3);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(18, 153, 144, 0.2);
+}
+
+/* Style for option elements (limited browser support) */
+option {
+    background: rgb(255, 251, 222); /* Cream background */
+    color: rgb(9, 107, 104); /* Dark teal text */
+    padding: 0.5rem;
+    font-size: 1rem;
+}
+
+/* Optional: Style for selected option (if supported) */
+option:checked {
+    background: rgba(18, 153, 144, 0.2); /* Light teal highlight */
+    color: rgb(9, 107, 104);
+}
 
 .actions {
     display: flex;
@@ -94,6 +144,13 @@ p {
 .btn-secondary:hover {
     background-color: rgba(255, 251, 222, 0.1);
     transform: translateY(-2px);
+}
+
+.task-options {
+    width: 100%;
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: space-between;
 }
 
 /* --- Tasks List --- */

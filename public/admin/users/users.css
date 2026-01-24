@@ -16,3 +16,27 @@ tr>td{
     flex: 1; /* Allows h1 to take remaining space and center itself */
     text-align: center;
 }
+.container{
+    width: 90%;
+    max-width: 1200px;
+    margin: 2rem auto;
+    height: auto;
+    min-height: 700px;
+
+}
+body {
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+table {
+    margin-top: 80px;
+    width: 100%;
+    border-collapse: separate;
+    background: rgba(255, 251, 222, 0.025); 
+    backdrop-filter: blur(10px);
+    border-radius: 1.5rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    padding: 10px;
+}
