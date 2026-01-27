@@ -36,6 +36,14 @@ async function patchUser(id, user) {
     return result.affectedRows;
 }
 
+async function getForCategories() {
+    let sql = 'SELECT id,name,email,user_name FROM users';
+    let [rows] = await db.query(sql);
+    console.log(rows);
+
+    return rows;
+}
+
 module.exports = {
-    getAll, getById, deleteById, patchUser
+    getAll, getById, deleteById, patchUser, getForCategories 
 }

@@ -213,4 +213,15 @@ function inputBtnHandler() {
         editTask();
     }
 }
+
+
+function deleteCookie(name) {
+    document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+}
+document.getElementById("logOut").addEventListener("click", () => {
+    deleteCookie('jwt');
+    window.location.href = "/login";
+});
+
+
 window.onload = fetchTasks;

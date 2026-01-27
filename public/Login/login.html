@@ -176,6 +176,13 @@
 
             console.log("login attempt finished");
         }
+
+    document.getElementById("password").addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+        login();
+    }
+    });
+
     </script>
 </body>
 

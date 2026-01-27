@@ -1,4 +1,4 @@
-const {getAll,getById,deleteById,patchUser} = require('../model/users_M.js');
+const {getAll,getById,deleteById,patchUser , getForCategories} = require('../model/users_M.js');
 
 
 
@@ -56,6 +56,18 @@ async function updateUser(req,res) {
    }
 }
 
+async function getUsersForCategories(req,res) {
+   try {
+      let users = await getForCategories();
+      if(users.length == 0){
+         res.status(400).json({message:'no users found'});
+      }
+      res.status(200).json(users);
+   } catch (err) {
+      res.status(500).json({message:"server error"});
+   }
+}
+
 module.exports={
-    getAllUsers,getUser,deleteUser,updateUser
+    getAllUsers,getUser,deleteUser,updateUser,getUsersForCategories
 }
