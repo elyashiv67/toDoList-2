@@ -53,6 +53,35 @@ function renderCategories() {
         container.innerHTML = html;
 }
 
+function addCategoryShow() {
+    const inputContainer = document.getElementById("inputContainer");
+    inputContainer.classList.toggle("inputContainer-overlay-visible");
+    document.getElementById("inputTitle").innerHTML = "Add Category";
+    document.getElementById("addCategoryBtn").innerHTML = "Add Category";
+    document.getElementById("addCategoryBtn").value = 0;
+    document.getElementById("categoryID").value = 0;
+    document.getElementById("categoryName").value = "";
+}
+
+function closeInputContainer(e) {
+    const inputContainer = document.getElementById("inputContainer");
+    if (e.target === inputContainer) {
+        inputContainer.classList.toggle("inputContainer-overlay-visible");
+    }
+}
+
+
+
+function inputBtnHandler() {
+    let btn = document.getElementById("addCategoryBtn");
+    if (btn.value == 0) {
+        addCategory();
+        //need to add
+    } else {
+        editCategory();
+        //need to add
+    }
+}
 
 
 fetchCategories().then(() => {
