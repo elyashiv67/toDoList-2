@@ -1,4 +1,4 @@
-const {getAll,getById , add , delete_task , patchTask} = require('../model/tasks_M.js');
+const {getAll,getById , add , delete_task , patchTask , markTaskDone} = require('../model/tasks_M.js');
 
 async function getAllTasks(req,res) {
     try {
@@ -83,5 +83,22 @@ async function updateTask(req,res) {
     }
 }
 
+async function markTaskAsDone(req,res) {
+    try {
+        let user_id = req.user.id;
+        let taskId = req.params.id;
+        let isDone = req.body.isDone;
+        let task = await markTaskDone(taskId,user_id,isDone);
+        console.log(task);
 
-module.exports={getAllTasks , getTask , addTask , deleteT , updateTask};
+        if(!task){
+            res.status(400).json({message:"not updated"});
+        }
+        res.status(200).json({message:"updated"});
+
+    } catch (err) {
+        res.status(500).json({message:"server error"});
+    }
+}
+
+module.exports={getAllTasks , getTask , addTask , deleteT , updateTask, markTaskAsDone};

@@ -2,8 +2,6 @@
 let allCategories = [];
 let allTasks = [];
 
-
-//need to add function to check box change
 function createTask(task) {
     let isDone = (task.isDone) ? "checked" : "";
     let doneClass = (task.isDone) ? "done" : "";
@@ -11,7 +9,7 @@ function createTask(task) {
             <li class="list-group-item ${doneClass}">
                 <h5>${task.name}</h5>
                 <p>${task.description}</p>
-                <input type="checkbox" ${isDone} style="accent-color: #00d26a; transform: scale(1.5); cursor: pointer;"> 
+                <input id="taskCheckbox" type="checkbox" ${isDone} onchange="markTaskDone(${task.id}, this.checked)"> 
                 <div>status: ${task.isDone ? "completed" : "in progress"}</div>
                 <div class="actionsTd">
                 <div id="deleteTask" onclick="deleteTask(${task.id})"><i class="fa-regular fa-trash-can fa-xl"></i></div>
@@ -112,6 +110,26 @@ async function deleteTask(id) {
     try {
         const response = await fetch(`/tasks/${id}`, {
             method: "DELETE"
+        });
+        console.log(response);
+        if (response.ok) {
+            fetchTasks();
+        }
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+async function markTaskDone(id, isDone) {
+    try {
+        const response = await fetch(`/tasks/done/${id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                isDone: isDone
+            })
         });
         console.log(response);
         if (response.ok) {

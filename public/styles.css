@@ -346,3 +346,8 @@ option:checked {
     transform: scale(1.2);
     border-color: rgba(255, 251, 222, 0.3);
 }
+#taskCheckbox{
+    accent-color: var(--secondary); /* Light Teal Checkbox */
+    transform: scale(1.5);
+    cursor: pointer;
+}

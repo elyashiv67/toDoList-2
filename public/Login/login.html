@@ -6,115 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: rgb(18, 153, 144);
-            --primary-hover: rgb(9, 107, 104);
-            --bg-gradient: linear-gradient(135deg, rgb(9, 107, 104) 0%, rgb(18, 153, 144) 100%);
-            --surface: #ffffff;
-            --text-main: #111827;
-            --text-secondary: #6b7280;
-            --border: #e5e7eb;
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            background: var(--bg-gradient);
-            color: var(--text-main);
-        }
-
-        .login-wrapper {
-            background-color: var(--surface);
-            padding: 2.5rem;
-            border-radius: 1rem;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            width: 100%;
-            max-width: 400px;
-            animation: slideIn 0.5s ease-out;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        h1 {
-            text-align: center;
-            color: var(--text-main);
-            margin: 0 0 0.5rem 0;
-            font-weight: 700;
-            font-size: 1.875rem;
-        }
-
-        p.subtitle {
-            text-align: center;
-            color: var(--text-secondary);
-            margin: 0 0 2rem 0;
-            font-size: 0.875rem;
-        }
-
-        .input-group {
-            margin-bottom: 1.5rem;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--text-main);
-            font-size: 0.875rem;
-            font-weight: 500;
-        }
-
-        input {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid var(--border);
-            border-radius: 0.5rem;
-            font-size: 1rem;
-            transition: all 0.2s ease;
-            font-family: inherit;
-        }
-
-        input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
-        }
-
-        button {
-            width: 100%;
-            background-color: var(--primary);
-            color: white;
-            padding: 0.75rem;
-            border: none;
-            border-radius: 0.5rem;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-            font-family: inherit;
-        }
-
-        button:hover {
-            background-color: var(--primary-hover);
-        }
-    </style>
+    <link rel="stylesheet" href="./login.css">
 </head>
 
 <body>
@@ -135,55 +27,9 @@
         <button onclick="login()">Sign In</button>
     </div>
 
-    <script>
-        async function login() {
-            const username = document.getElementById("username").value;
-            const password = document.getElementById("password").value;
+    <script src="./login.js"></script>
 
-            if (!username || !password) {
-                alert("Please fill in both fields");
-                return;
-            }
 
-            let formData = {
-                userName: username,
-                pass: password
-            };
-
-            try {
-                let response = await fetch("/auth/login", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(formData)
-                });
-                console.log(response);
-
-                if (response.ok) {
-                    let greetedUser = "hello " + username;
-                    // Success animation or feedback could go here
-                    alert("Login successful! " + greetedUser);
-                    window.location.href = "/Home";
-                } else {
-                    const errorData = await response.json();
-                    alert("Login failed: " + (errorData.message || "Unknown error"));
-                }
-            } catch (error) {
-                console.error("Login Error:", error);
-                alert("An error occurred while trying to login.");
-            }
-
-            console.log("login attempt finished");
-        }
-
-    document.getElementById("password").addEventListener("keypress", function(event) {
-    if (event.key === "Enter") {
-        login();
-    }
-    });
-
-    </script>
 </body>
 
 </html>

@@ -40,10 +40,18 @@ async function patchTask(taskId, user_id, task) {
     return result.affectedRows;
 }
 
+async function markTaskDone(taskId, user_id, isDone) {
+    const sql = "UPDATE tasks SET isDone = ? WHERE id = ? and user_id = ?";
+    const [result] = await db.query(sql, [isDone, taskId, user_id]); 
+    console.log(result);
+    return result.affectedRows;
+}
+
 module.exports= {
     getAll,
     getById,
     add,
     delete_task,
-    patchTask
+    patchTask,
+    markTaskDone
 };
