@@ -21,7 +21,7 @@ async function fetchUsers() {
 
 async function fetchCategories() {
     try {
-        const response = await fetch('/categories');
+        const response = await fetch('/categories/manager');
         const data = await response.json();
 
         for (let category of data) {
@@ -32,21 +32,26 @@ async function fetchCategories() {
             console.log("failed to load categories");
             return;
         }
+        renderCategories(data);
 
     } catch (err) {
         console.log(err);
     }
 }
 
-function renderCategories() {
+function renderCategories(data) {
         let container = document.getElementById("CategoriesContainer");
         container.innerHTML = "";
         let html = "";
-        allCategories.forEach(category => {
+        data.forEach(category => {
             if (category) {
                 html += `<div class="category">
                 <h2>${category.name}</h2>
-                <div>user: ${allUsers[category.user_id]?.name || 'Unknown User'}</div>
+                <div>user: ${allUsers[category.user_id]?.user_name || 'Unknown User'}</div>
+                <div class="category-actions">
+                    <div id="deleteCategory" onclick="deleteCategory(${category.id})"><i class="fa-regular fa-trash-can fa-xl"></i></div>
+                <div id="editCategory" onclick="editCategoryShow(${category.id})"><i class="fa-regular fa-pen-to-square fa-xl"></i></div>
+                </div>
                 </div>`;
             }
         });
@@ -61,6 +66,89 @@ function addCategoryShow() {
     document.getElementById("addCategoryBtn").value = 0;
     document.getElementById("categoryID").value = 0;
     document.getElementById("categoryName").value = "";
+    selectFill();
+}
+
+function editCategoryShow(id) {
+    const inputContainer = document.getElementById("inputContainer");
+    inputContainer.classList.toggle("inputContainer-overlay-visible");
+    document.getElementById("inputTitle").innerHTML = "Edit Category";
+    document.getElementById("addCategoryBtn").innerHTML = "Edit Category";
+    document.getElementById("addCategoryBtn").value = 1;
+    let category = allCategories[id];
+    console.log(category);
+    selectFill();
+    
+    document.getElementById("categoryID").value = category.id;
+    document.getElementById("categoryName").value = category.name;
+    document.getElementById("userName").value = allUsers[category.user_id]?.id;
+}
+
+async function deleteCategory(id) {
+    try {
+        const response = await fetch(`/categories/${id}`, {
+            method: 'DELETE'
+        });
+        if (response.ok) {
+            fetchCategories();
+        } else {
+            console.log("Failed to delete category");
+            console.log(response);
+        }
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+async function addCategory() {
+    const name = document.getElementById("categoryName").value;
+    const userId = document.getElementById("userName").value;
+    try {
+        const response = await fetch('/categories', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ name, user_id: userId })
+        });
+        if (response.ok) {
+            fetchCategories();
+            document.getElementById("inputContainer").classList.remove("inputContainer-overlay-visible");
+        } else {
+            console.log("Failed to add category");
+            console.log(response);
+        }
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+async function editCategory() {
+    const categoryId = document.getElementById("categoryID").value;
+    const name = document.getElementById("categoryName").value;
+    const userId = Number(document.getElementById("userName").value);
+
+    try {
+        const response = await fetch(`/categories/${categoryId}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ 
+                 name: name
+                , user_id: userId })
+        });
+        if (response.ok) {
+            fetchCategories();
+            document.getElementById("inputContainer").classList.remove("inputContainer-overlay-visible");
+        } else {
+            console.log(response);
+            
+            console.log("Failed to edit category");
+        }
+    } catch (err) {
+        console.log(err);
+    }
 }
 
 function closeInputContainer(e) {
@@ -71,24 +159,33 @@ function closeInputContainer(e) {
 }
 
 
-
 function inputBtnHandler() {
     let btn = document.getElementById("addCategoryBtn");
     if (btn.value == 0) {
         addCategory();
-        //need to add
     } else {
         editCategory();
-        //need to add
     }
 }
 
-
-fetchCategories().then(() => {
-    fetchUsers().then(() => {
-        renderCategories();
+function selectFill(){
+    const userSelect = document.getElementById("userName");
+    let option = `<option value="">Select user</option>`;
+    allUsers.forEach(user => {
+        if(user){
+            option += `<option value="${user.id}">${user.user_name}</option>`;
+        }
     });
-});
+    userSelect.innerHTML = option;
+}
+
+
+fetchUsers();
+fetchCategories();
+
+
+
+
 
 
 

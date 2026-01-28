@@ -127,6 +127,7 @@ option:checked {
 .btn-primary {
     background-color: var(--surface); /* Cream Button */
     color: rgb(9, 107, 104);          /* Dark Teal Text */
+    cursor: pointer;
 }
 
 .btn-primary:hover {
@@ -140,6 +141,7 @@ option:checked {
     background-color: transparent;
     border: 2px solid var(--surface); /* Cream Border */
     color: var(--surface);
+    cursor: pointer;
 }
 
 .btn-secondary:hover {

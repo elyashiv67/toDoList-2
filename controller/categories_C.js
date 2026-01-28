@@ -1,4 +1,4 @@
-const { getAll, add, deleteC, getById, PatchCategory } = require('../model/categories_M.js');
+const { getAll, add, deleteC, getById, PatchCategory , getAllAdmin} = require('../model/categories_M.js');
 
 async function getAllCategories(req, res) {
     try {
@@ -14,6 +14,21 @@ async function getAllCategories(req, res) {
         res.status(500).json({ message: "err" });
     }
 }
+
+async function getAllCategoriesManager(req, res) {
+    try {
+        let categories = await getAllAdmin();
+
+        if (categories.length == 0) {
+            res.status(400).json({ message: 'no categories found' });
+            return;
+        }
+        res.status(200).json(categories);
+    } catch (err) {
+        res.status(500).json({ message: "err" });
+    }
+}
+
 
 async function getCategory(req, res) {
     try {
@@ -53,8 +68,7 @@ async function addCategory(req, res) {
 
 async function deleteCategory(req, res) {
     try {
-        let user_id = req.user.id;
-        let category = await deleteC(req.id, user_id);
+        let category = await deleteC(req.id);
         res.status(200).json({ message: 'deleted' });
 
     } catch (error) {
@@ -65,7 +79,7 @@ async function deleteCategory(req, res) {
 async function editCategory(req, res) {
     try {
         let categoryId = req.params.id;
-        let user_id = req.user.id;
+        let user_id = req.user_id;
         let categoryName = req.name;
         let category = await PatchCategory(categoryId, user_id, categoryName);
         if (!category) {
@@ -83,5 +97,6 @@ module.exports = {
     addCategory,
     deleteCategory,
     getCategory,
-    editCategory
+    editCategory,
+    getAllCategoriesManager
 }

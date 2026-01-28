@@ -6,6 +6,12 @@ async function getAll(user_id) {
     console.log(rows);
     return rows;
 }
+async function getAllAdmin() {
+    let sql = 'SELECT id,name,user_id FROM categories';
+    let [rows] = await db.query(sql);
+    console.log(rows);
+    return rows;
+}
 
 async function getById(id , user_id) {
     const sql = "SELECT name FROM categories WHERE id = ? and user_id = ?";
@@ -20,16 +26,16 @@ async function add(name,user_id) {
     return result.insertId;
 }
 
-async function deleteC(id , user_id) {
-    const sql = "DELETE FROM categories WHERE id = ? and user_id = ?";
-    const [result] = await db.query(sql, [id , user_id]); 
+async function deleteC(id) {
+    const sql = "DELETE FROM categories WHERE id = ?";
+    const [result] = await db.query(sql, [id]); 
     console.log(result);
     return result.affectedRows;
 }
 
 async function PatchCategory(id , user_id, name) {
-    const sql = "UPDATE categories SET name = ? WHERE id = ? and user_id = ?";
-    const [result] = await db.query(sql, [name , id , user_id]); 
+    const sql = "UPDATE categories SET name = ? ,user_id = ? WHERE id = ?";
+    const [result] = await db.query(sql, [name , user_id, id]); 
     console.log(result);
     return result.affectedRows;
 }
@@ -40,5 +46,6 @@ module.exports = {
     getById,
     add,
     deleteC,
-    PatchCategory
+    PatchCategory,
+    getAllAdmin
 }

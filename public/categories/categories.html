@@ -7,12 +7,15 @@
     <script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/js/all.min.js"></script>
     <title>categories</title>
     <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="./categories.css">
 </head>
 <body>
     <div class="container">
-        <h1>Categories Management</h1>
-
-        <div><button class="btn btn-primary" onclick="addCategoryShow()">Add Category</button></div>
+        <div id="topRow">
+            <a href="../../Home.html" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+            <h1>Categories Management</h1>
+        <button class="btn btn-primary" onclick="addCategoryShow()">Add Category</button>
+        </div>
         <div class="inputContainer-overlay-hidden" id="inputContainer" onclick="closeInputContainer(event)">
           <div class="inputContainer-content">
               <h2 id="inputTitle">Add New Category</h2>

@@ -22,8 +22,8 @@ tr>td{
     margin: 2rem auto;
     height: auto;
     min-height: 700px;
-
 }
+
 body {
     justify-content: flex-start;
     align-items: flex-start;
@@ -39,4 +39,11 @@ table {
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     overflow: hidden;
     padding: 10px;
+}
+tbody tr:nth-child(odd) {
+    background: rgba(255, 251, 222, 0.05);
+}
+
+tbody tr:nth-child(even) {
+    background: rgba(255, 251, 222, 0.217);
 }
