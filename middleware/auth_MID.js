@@ -71,9 +71,24 @@ async function isAdmin(req,res,next){
     }
 }
 
+async function isAdminCheck(req,res) {
+    try {
+        const user = req.user;
+        let isAdmin = await checkAdmin(user.id);
+        if(!isAdmin){
+            return  res.status(200).json({isAdmin:false});
+        }
+        res.status(200).json({isAdmin:true});
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({message:"server error"});
+    }
+}
+
 module.exports = {valuesToAdd,
     encryptPass,
     valuesToLogin,
     isLoggedIn,
-    isAdmin
+    isAdmin,
+    isAdminCheck
     };

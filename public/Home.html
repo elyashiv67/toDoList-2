@@ -11,15 +11,16 @@
 </head>
 
 <body>
-    <div id="logOut" class="btn btn-primary">log out<i class="fa-solid fa-user-slash"></i></div>
+    <div id="logOut" class="btn btn-primary" onclick="deleteCookie('jwt')">log out <i class="fa-solid fa-user-slash"></i></div>
     <div class="container">
         <h1>ToDo List</h1>
         <div class="actions">
-            <a href="./admin/users/users.html" class="btn btn-primary">Users</a>
-            <a href="./categories/categories.html" class="btn btn-secondary">Categories</a>
+            <div class="btn btn-primary" onclick="goToPage('./admin/users/users.html')">Users</div>
+            <div class="btn btn-secondary" onclick="goToPage('./categories/categories.html')">Categories</div>
         </div>
         <div class="task-options">
-            <select id="selectCategories">filter categories</select>
+            <select id="selectCategories">filter categories
+            <option value="0">Select Category</option></select>
             <div class="btn btn-secondary" onclick="addTaskShow()">add Task<i class="fa-regular fa-square-plus fa-xl"></i></div>
         </div>
         <div id="showTasks"></div>

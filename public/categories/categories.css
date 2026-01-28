@@ -25,6 +25,12 @@ display: flex;
     border-radius: 1rem;
     box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.2);
     text-align: center;
+    transition: all 0.3s ease;
+}
+.category:hover{
+    background: rgba(255, 251, 222, 0.15);
+    transform: translateY(-4px);
+    border-color: rgba(255, 251, 222, 0.3);
 }
 .category-actions{
     display: flex;

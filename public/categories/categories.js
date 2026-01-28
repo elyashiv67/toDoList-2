@@ -85,6 +85,9 @@ function editCategoryShow(id) {
 }
 
 async function deleteCategory(id) {
+    if(!confirm("are you sure you want to delete this category?")){
+        return;
+    }
     try {
         const response = await fetch(`/categories/${id}`, {
             method: 'DELETE'

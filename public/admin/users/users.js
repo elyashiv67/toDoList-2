@@ -41,6 +41,9 @@ function renderUsers(users) {
 
 
 async function deleteUser(userId) {
+    if(!confirm("are you sure you want to delete this user?")){
+        return;
+    }
     try {
         const response = await fetch(`/users/${userId}`, {
             method: 'DELETE',

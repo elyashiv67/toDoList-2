@@ -2,6 +2,8 @@
 let allCategories = [];
 let allTasks = [];
 
+
+//need to add function to check box change
 function createTask(task) {
     let isDone = (task.isDone) ? "checked" : "";
     let doneClass = (task.isDone) ? "done" : "";
@@ -10,8 +12,12 @@ function createTask(task) {
                 <h5>${task.name}</h5>
                 <p>${task.description}</p>
                 <input type="checkbox" ${isDone} style="accent-color: #00d26a; transform: scale(1.5); cursor: pointer;"> 
+                <div>status: ${task.isDone ? "completed" : "in progress"}</div>
+                <div class="actionsTd">
                 <div id="deleteTask" onclick="deleteTask(${task.id})"><i class="fa-regular fa-trash-can fa-xl"></i></div>
                 <div id="editTask" onclick="openEditTask(${task.id})"><i class="fa-regular fa-pen-to-square fa-xl"></i></div>
+                </div>
+                
                 <div>category: ${allCategories[task.category_id]?.name || "No Category"}</div>
             </li>
         `;
@@ -68,7 +74,7 @@ async function fetchCategories() {
 }
 function selectCategoryOptions(tagID) {
     const select = document.getElementById(tagID || "selectCategories");
-    let optionsHTML = '<option value="0">Select Category</option>';
+    let optionsHTML = select.innerHTML;
     optionsHTML += '<option value="0">none</option>';
 
     for (let category of allCategories) {
@@ -100,6 +106,9 @@ async function filterTasksByCategory() {
 }
 
 async function deleteTask(id) {
+    if(!confirm("are you sure you want to delete this task?")){
+        return;
+    }
     try {
         const response = await fetch(`/tasks/${id}`, {
             method: "DELETE"
@@ -216,12 +225,35 @@ function inputBtnHandler() {
 
 
 function deleteCookie(name) {
+    if(!confirm("are you sure you want to log out?")){
+        return;
+    }
     document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-}
-document.getElementById("logOut").addEventListener("click", () => {
-    deleteCookie('jwt');
     window.location.href = "/login";
-});
+}
+
+
+async function goToPage(pageUrl) {
+    try {
+        let response =  await fetch('/auth/isAdmin');
+        if(!response.ok){
+            window.location.href = "/login";
+            return;
+        }
+        let data = await response.json();
+        console.log(data);
+        
+        if(!data.isAdmin){
+            alert("access denied");
+            return;
+        }
+        window.location.href = pageUrl;
+        
+    } catch (err) {
+        
+    }
+    window.location.href = pageUrl;
+}
 
 
 window.onload = fetchTasks;

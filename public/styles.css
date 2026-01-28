@@ -210,27 +210,6 @@ option:checked {
     grid-column: 1;
 }
 
-#deleteTask{
-    width: fit-content;
-    margin-right: 1rem;
-}
-#deleteTask:hover {
-    background: rgba(255, 251, 222, 0.15);
-    transform: translateY(-2px);
-    transform: scale(1.2);
-    border-color: rgba(255, 251, 222, 0.3);
-}
-
-#editTask{
-    width: fit-content;
-    margin-right: 1rem;
-}
-#editTask:hover {
-    background: rgba(255, 251, 222, 0.15);
-    transform: translateY(-2px);
-    transform: scale(1.2);
-    border-color: rgba(255, 251, 222, 0.3);
-}
 
 #deleteUser:hover, #editUser:hover {
     background: rgba(255, 251, 222, 0.15);
@@ -331,9 +310,39 @@ option:checked {
     box-sizing: border-box; /* Fix width issues */
 }
 
-#logout {
+#logOut {
     position: absolute;
-    top: 1rem;
-    left: 1rem;
+    display: inline-block;
+    margin-bottom: 2rem;
+    top: 2rem;
+    left: 2rem;
     z-index: 5; /* Ensure it's above other elements */
+}
+.actionsTd{
+    display: flex;
+    gap: 1rem;
+}
+
+#deleteTask{
+    width: fit-content;
+    margin-right: 1rem;
+    color: var(--surface);
+}
+#deleteTask:hover {
+    background: rgba(255, 251, 222, 0.15);
+    transform: translateY(-2px);
+    transform: scale(1.2);
+    border-color: rgba(255, 251, 222, 0.3);
+}
+
+#editTask{
+    width: fit-content;
+    margin-right: 1rem;
+    color: var(--surface);
+}
+#editTask:hover {
+    background: rgba(255, 251, 222, 0.15);
+    transform: translateY(-2px);
+    transform: scale(1.2);
+    border-color: rgba(255, 251, 222, 0.3);
 }
