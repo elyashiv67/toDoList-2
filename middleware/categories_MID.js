@@ -11,15 +11,10 @@ function valuesToAdd(req,res,next){
 //need to add values to edit as middleware
 function valuesToEdit(req,res,next){
     let name = req.body.name;
-    let user_id = req.body.user_id;
     if(!name){
         return res.status(400).json({message:'all fields are required'});
     }
-    if(!user_id){
-        user_id = null;
-    }
     req.name = name;
-    req.user_id = user_id;
     next();
 }
 

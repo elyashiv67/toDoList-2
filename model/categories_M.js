@@ -6,12 +6,6 @@ async function getAll(user_id) {
     console.log(rows);
     return rows;
 }
-async function getAllAdmin() {
-    let sql = 'SELECT id,name,user_id FROM categories';
-    let [rows] = await db.query(sql);
-    console.log(rows);
-    return rows;
-}
 
 async function getById(id , user_id) {
     const sql = "SELECT name FROM categories WHERE id = ? and user_id = ?";
@@ -27,6 +21,9 @@ async function add(name,user_id) {
 }
 
 async function deleteC(id) {
+    const tasksSql = "DELETE FROM tasks WHERE category_id = ?";
+    await db.query(tasksSql, [id]);
+
     const sql = "DELETE FROM categories WHERE id = ?";
     const [result] = await db.query(sql, [id]); 
     console.log(result);
@@ -34,11 +31,18 @@ async function deleteC(id) {
 }
 
 async function PatchCategory(id , user_id, name) {
-    const sql = "UPDATE categories SET name = ? ,user_id = ? WHERE id = ?";
-    const [result] = await db.query(sql, [name , user_id, id]); 
+    const sql = "UPDATE categories SET name = ?  WHERE id = ? and user_id = ?";
+    const [result] = await db.query(sql, [name , id , user_id]); 
     console.log(result);
     return result.affectedRows;
 }
+
+async function countTasksForCategory(id) {
+    const sql = "SELECT COUNT(*) as taskCount FROM tasks WHERE category_id = ?";
+    const [rows] = await db.query(sql, [id]); 
+    return rows[0].taskCount;
+}
+
 
 
 module.exports = {
@@ -47,5 +51,5 @@ module.exports = {
     add,
     deleteC,
     PatchCategory,
-    getAllAdmin
+    countTasksForCategory
 }

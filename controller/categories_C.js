@@ -1,4 +1,4 @@
-const { getAll, add, deleteC, getById, PatchCategory , getAllAdmin} = require('../model/categories_M.js');
+const { getAll, add, deleteC, getById, PatchCategory , countTasksForCategory} = require('../model/categories_M.js');
 
 async function getAllCategories(req, res) {
     try {
@@ -15,19 +15,6 @@ async function getAllCategories(req, res) {
     }
 }
 
-async function getAllCategoriesManager(req, res) {
-    try {
-        let categories = await getAllAdmin();
-
-        if (categories.length == 0) {
-            res.status(400).json({ message: 'no categories found' });
-            return;
-        }
-        res.status(200).json(categories);
-    } catch (err) {
-        res.status(500).json({ message: "err" });
-    }
-}
 
 
 async function getCategory(req, res) {
@@ -79,8 +66,8 @@ async function deleteCategory(req, res) {
 async function editCategory(req, res) {
     try {
         let categoryId = req.params.id;
-        let user_id = req.user_id;
         let categoryName = req.name;
+        let user_id = req.user.id;
         let category = await PatchCategory(categoryId, user_id, categoryName);
         if (!category) {
             return res.status(400).json({ message: 'no category found' });
@@ -92,11 +79,26 @@ async function editCategory(req, res) {
     }
 }
 
+async function getCategoryTaskCount(req, res) {
+    try {
+        let categoryId = req.id;
+        let taskCount = await countTasksForCategory(categoryId);
+        console.log(taskCount);
+        if (taskCount === null || taskCount === undefined || taskCount <= 0) {
+            return res.status(400).json({ message: 'no category found' });
+        }
+        
+        res.status(200).json({ taskCount: taskCount });
+    } catch (err) {
+        res.status(500).json({ message: "server error" });
+    }
+}
+
 module.exports = {
     getAllCategories,
     addCategory,
     deleteCategory,
     getCategory,
     editCategory,
-    getAllCategoriesManager
+    getCategoryTaskCount
 }

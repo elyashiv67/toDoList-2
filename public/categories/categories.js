@@ -1,6 +1,4 @@
-
 let allCategories = [];
-let allUsers = [];
 
 async function fetchUsers() {
     try {
@@ -11,9 +9,6 @@ async function fetchUsers() {
             window.location.href = "/Home";
             return;
         }
-        for (let user of users) {
-            allUsers[user.id] = user;
-        }
     } catch (err) {
         console.log(err);
     }
@@ -21,18 +16,25 @@ async function fetchUsers() {
 
 async function fetchCategories() {
     try {
-        const response = await fetch('/categories/manager');
+        const response = await fetch('/categories');
         const data = await response.json();
-
-        for (let category of data) {
-            allCategories[category.id] = category;
+        
+        if(response.status == 400){
+            let container = document.getElementById("CategoriesContainer");
+            container.innerHTML = "<h2>No categories found</h2>"; 
+            return;
         }
         if(!response.ok){
             window.location.href = "/Home";
             console.log("failed to load categories");
             return;
         }
-        renderCategories(data);
+        for (let category of data) {
+            allCategories[category.id] = category;
+        }
+        if(data.length > 0){
+            renderCategories(data);
+        }
 
     } catch (err) {
         console.log(err);
@@ -47,7 +49,6 @@ function renderCategories(data) {
             if (category) {
                 html += `<div class="category">
                 <h2>${category.name}</h2>
-                <div>user: ${allUsers[category.user_id]?.user_name || 'Unknown User'}</div>
                 <div class="category-actions">
                     <div id="deleteCategory" onclick="deleteCategory(${category.id})"><i class="fa-regular fa-trash-can fa-xl"></i></div>
                 <div id="editCategory" onclick="editCategoryShow(${category.id})"><i class="fa-regular fa-pen-to-square fa-xl"></i></div>
@@ -66,7 +67,6 @@ function addCategoryShow() {
     document.getElementById("addCategoryBtn").value = 0;
     document.getElementById("categoryID").value = 0;
     document.getElementById("categoryName").value = "";
-    selectFill();
 }
 
 function editCategoryShow(id) {
@@ -77,42 +77,46 @@ function editCategoryShow(id) {
     document.getElementById("addCategoryBtn").value = 1;
     let category = allCategories[id];
     console.log(category);
-    selectFill();
     
     document.getElementById("categoryID").value = category.id;
     document.getElementById("categoryName").value = category.name;
-    document.getElementById("userName").value = allUsers[category.user_id]?.id;
 }
 
 async function deleteCategory(id) {
-    if(!confirm("are you sure you want to delete this category?")){
-        return;
-    }
     try {
-        const response = await fetch(`/categories/${id}`, {
-            method: 'DELETE'
-        });
-        if (response.ok) {
-            fetchCategories();
-        } else {
-            console.log("Failed to delete category");
-            console.log(response);
+        const taskCountResponse = await fetch(`/categories/tasksCount/${id}`);
+        const responseJson = await taskCountResponse.json();
+        const taskCount = responseJson.taskCount;
+        if(!confirm(`Are you sure you want to delete this category? It has ${taskCount} associated tasks.`)){
+            return;
         }
-    } catch (err) {
-        console.log(err);
+        try {
+            const response = await fetch(`/categories/${id}`, {
+                method: 'DELETE'
+            });
+            if (response.ok) {
+                fetchCategories();
+            } else {
+                console.log("Failed to delete category");
+                console.log(response);
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    } catch (error) {
+        console.log(error);
     }
 }
 
 async function addCategory() {
     const name = document.getElementById("categoryName").value;
-    const userId = document.getElementById("userName").value;
     try {
         const response = await fetch('/categories', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ name, user_id: userId })
+            body: JSON.stringify({ name: name })
         });
         if (response.ok) {
             fetchCategories();
@@ -129,7 +133,6 @@ async function addCategory() {
 async function editCategory() {
     const categoryId = document.getElementById("categoryID").value;
     const name = document.getElementById("categoryName").value;
-    const userId = Number(document.getElementById("userName").value);
 
     try {
         const response = await fetch(`/categories/${categoryId}`, {
@@ -139,7 +142,7 @@ async function editCategory() {
             },
             body: JSON.stringify({ 
                  name: name
-                , user_id: userId })
+                })
         });
         if (response.ok) {
             fetchCategories();
@@ -171,21 +174,8 @@ function inputBtnHandler() {
     }
 }
 
-function selectFill(){
-    const userSelect = document.getElementById("userName");
-    let option = `<option value="">Select user</option>`;
-    allUsers.forEach(user => {
-        if(user){
-            option += `<option value="${user.id}">${user.user_name}</option>`;
-        }
-    });
-    userSelect.innerHTML = option;
-}
 
-
-fetchUsers();
 fetchCategories();
-
 
 
 

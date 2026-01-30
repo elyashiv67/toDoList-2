@@ -73,7 +73,7 @@ async function fetchCategories() {
 function selectCategoryOptions(tagID) {
     const select = document.getElementById(tagID || "selectCategories");
     let optionsHTML = select.innerHTML;
-    optionsHTML += '<option value="0">none</option>';
+    optionsHTML = '<option value="0">none</option>';
 
     for (let category of allCategories) {
         if (category) {
@@ -251,7 +251,11 @@ function deleteCookie(name) {
 }
 
 
-async function goToPage(pageUrl) {
+async function goToPage(pageUrl , requireAdmin = false) {
+    if(!requireAdmin){
+        window.location.href = pageUrl;
+        return;
+    }
     try {
         let response =  await fetch('/auth/isAdmin');
         if(!response.ok){
