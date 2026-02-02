@@ -72,8 +72,8 @@ async function fetchCategories() {
 }
 function selectCategoryOptions(tagID) {
     const select = document.getElementById(tagID || "selectCategories");
-    let optionsHTML = select.innerHTML;
-    optionsHTML = '<option value="0">none</option>';
+    let optionsHTML = '<option value="">select category</option>';
+    optionsHTML += '<option value="0">none</option>';
 
     for (let category of allCategories) {
         if (category) {

@@ -87,7 +87,7 @@ async function deleteCategory(id) {
         const taskCountResponse = await fetch(`/categories/tasksCount/${id}`);
         const responseJson = await taskCountResponse.json();
         const taskCount = responseJson.taskCount;
-        if(!confirm(`Are you sure you want to delete this category? It has ${taskCount} associated tasks.`)){
+        if(!confirm(`Are you sure you want to delete this category? It has ${taskCount || 0} associated tasks.`)){
             return;
         }
         try {
