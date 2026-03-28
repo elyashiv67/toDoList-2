@@ -2,7 +2,7 @@ const db = require('../config/db_config');
 
 
 async function getAll() {
-    let sql = 'SELECT id,name,email,user_name,pass,is_admin FROM users';
+    let sql = 'SELECT id,name,email,user_name,is_admin FROM users';
     let [rows] = await db.query(sql);
     console.log(rows);
 
@@ -45,5 +45,5 @@ async function getForCategories() {
 }
 
 module.exports = {
-    getAll, getById, deleteById, patchUser, getForCategories 
+    getAll, getById, deleteById, patchUser, getForCategories
 }
