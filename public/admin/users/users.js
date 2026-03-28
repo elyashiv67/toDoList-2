@@ -27,7 +27,6 @@ function renderUsers(users) {
         <tr>
             <td>${user.name}</td>
             <td>${user.user_name}</td>
-            <td>${user.pass}</td>
             <td>${user.email}</td>
             <td>${role}</td>
             <td class="actionsTd">
