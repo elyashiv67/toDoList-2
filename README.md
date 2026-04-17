@@ -27,28 +27,6 @@ It serves as a foundational learning project meant to demonstrate how to connect
 - [Node.js](https://nodejs.org/) installed
 - A running MySQL server
 
-### Installation
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/elyashiv67/toDoList-2.git
-   cd toDoList-2
-   ```
-
-2. **Install all dependencies:**
-   ```bash
-   npm install
-   ```
-
-3. **Environment Setup:**
-   Ensure you have a `.env` file in the root of your project to connect to your database and provide a JWT secret.
-   *(Example variables typically include `DB_HOST`, `DB_USER`, `DB_PASS`, `DB_NAME`, and `JWT_SECRET`)*
-
-4. **Run the server:**
-   ```bash
-   npm start
-   ```
-   *This uses `nodemon` to automatically restart the server upon any file changes.*
 
 ## 📂 Project Overview
 - `/controller` - Houses the business logic and route handlers (e.g., `users_C.js`, `categories_C.js`).
