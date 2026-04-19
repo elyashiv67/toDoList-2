@@ -62,7 +62,7 @@ function createJwt(req,res){
         console.log(token);   
         res.cookie('jwt',token,{
             maxAge:1000*60*60*3,
-            httpOnly:true,
+            httpOnly:false,
             sameSite:'lax',
             secure:false
         }).status(200).json({message:"Login successful"}); 
