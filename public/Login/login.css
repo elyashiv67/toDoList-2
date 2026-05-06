@@ -105,3 +105,22 @@
         button:hover {
             background-color: var(--primary-hover);
         }
+
+        .register-prompt {
+            text-align: center;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin: 0 0 1.5rem 0;
+        }
+
+        .register-prompt a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        .register-prompt a:hover {
+            color: var(--primary-hover);
+            text-decoration: underline;
+        }
