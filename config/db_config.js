@@ -1,17 +1,19 @@
 const mysql = require('mysql2');
 require('dotenv').config();
 
+const isCloudDB = process.env.HOST.includes('aivencloud.com');
+
 const pool = mysql.createPool({
   connectionLimit: 100,
   host: process.env.HOST,
-  port: process.env.PORT,
+  port: process.env.DB_PORT,
   database: process.env.DB_NAME,
   user: process.env.DB_USER,
   password: process.env.DB_PASS,
   dateStrings: true,
-  ssl: {
+  ssl: isCloudDB ? {
     rejectUnauthorized: false
-  }
+  } : undefined
 });
 
 pool.getConnection((err, connection) => {
