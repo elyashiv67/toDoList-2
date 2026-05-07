@@ -10,7 +10,8 @@ app.use(express.json());
 app.use(cookies());
 const frontURL = [
     "http://localhost:5173",
-    "http://localhost:4364"
+    "http://localhost:4364",
+    "https://todolist-jcvt.onrender.com"
 ];
 const cors = require('cors');
 app.use(cors({
