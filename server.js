@@ -11,7 +11,7 @@ app.use(cookies());
 const frontURL = [
     "http://localhost:5173",
     "http://localhost:4364",
-    "https://todolist-jcvt.onrender.com"
+    "https://to-do-list-react-zhv4.onrender.com"
 ];
 const cors = require('cors');
 app.use(cors({
