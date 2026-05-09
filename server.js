@@ -10,6 +10,8 @@ app.use(express.json());
 app.use(cookies());
 const frontURL = [
     "http://localhost:5173",
+    "http://10.0.0.10:5173",
+    "http://localhost:5174",
     "http://localhost:4364",
     "https://to-do-list-react-zhv4.onrender.com"
 ];

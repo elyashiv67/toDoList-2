@@ -1,13 +1,13 @@
 :root {
     /* Primary Accent (Medium Teal) */
     --primary: rgb(18, 153, 144);
-    
+
     /* Background Gradient: Dark Teal to Medium Teal */
     --bg-gradient: linear-gradient(135deg, rgb(9, 107, 104) 0%, rgb(18, 153, 144) 100%);
-    
+
     /* Surface / Text Color (Cream) */
     --surface: rgb(255, 251, 222);
-    
+
     /* Secondary Accent (Light Teal) */
     --secondary: rgb(144, 209, 202);
 }
@@ -22,14 +22,15 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: var(--surface); /* Cream Text */
+    color: var(--surface);
+    /* Cream Text */
     text-align: center;
     position: relative;
 }
 
 .container {
     /* Cream Glass Effect */
-    background: rgba(255, 251, 222, 0.1); 
+    background: rgba(255, 251, 222, 0.1);
     backdrop-filter: blur(10px);
     padding: 3rem;
     border-radius: 1.5rem;
@@ -56,7 +57,8 @@ p {
     opacity: 0.9;
     line-height: 1.6;
 }
-input{
+
+input {
     background: transparent;
     border: 2px solid var(--surface);
     color: var(--surface);
@@ -64,6 +66,7 @@ input{
     border-radius: 0.5rem;
     font-size: 1rem;
 }
+
 input::placeholder {
     color: var(--surface)
 }
@@ -80,13 +83,16 @@ select {
     background-position: right 0.5rem center;
     background-repeat: no-repeat;
     background-size: 1.5em 1.5em;
-    padding-right: 2.5rem; /* Space for arrow */
-    transition: all 0.3s ease; /* Smooth transitions */
+    padding-right: 2.5rem;
+    /* Space for arrow */
+    transition: all 0.3s ease;
+    /* Smooth transitions */
     cursor: pointer;
 }
 
 /* Hover and focus for select */
-select:hover, select:focus {
+select:hover,
+select:focus {
     border-color: rgb(9, 107, 104);
     background: rgba(144, 209, 202, 0.3);
     outline: none;
@@ -95,15 +101,18 @@ select:hover, select:focus {
 
 /* Style for option elements (limited browser support) */
 option {
-    background: rgb(255, 251, 222); /* Cream background */
-    color: rgb(9, 107, 104); /* Dark teal text */
+    background: rgb(255, 251, 222);
+    /* Cream background */
+    color: rgb(9, 107, 104);
+    /* Dark teal text */
     padding: 0.5rem;
     font-size: 1rem;
 }
 
 /* Optional: Style for selected option (if supported) */
 option:checked {
-    background: rgba(18, 153, 144, 0.2); /* Light teal highlight */
+    background: rgba(18, 153, 144, 0.2);
+    /* Light teal highlight */
     color: rgb(9, 107, 104);
 }
 
@@ -122,24 +131,34 @@ option:checked {
     transition: all 0.2s ease;
     font-size: 1rem;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap;
 }
 
 .btn-primary {
-    background-color: var(--surface); /* Cream Button */
-    color: rgb(9, 107, 104);          /* Dark Teal Text */
+    background-color: var(--surface);
+    /* Cream Button */
+    color: rgb(9, 107, 104);
+    /* Dark Teal Text */
     cursor: pointer;
 }
 
 .btn-primary:hover {
     transform: translateY(-2px);
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-    background-color: rgb(144, 209, 202); /* Light Teal Hover */
+    background-color: rgb(144, 209, 202);
+    /* Light Teal Hover */
     color: rgb(9, 107, 104);
 }
 
 .btn-secondary {
     background-color: transparent;
-    border: 2px solid var(--surface); /* Cream Border */
+    border: 2px solid var(--surface);
+    /* Cream Border */
     color: var(--surface);
     cursor: pointer;
 }
@@ -169,8 +188,10 @@ option:checked {
 #showTasks::-webkit-scrollbar {
     width: 6px;
 }
+
 #showTasks::-webkit-scrollbar-thumb {
-    background: rgba(255, 251, 222, 0.3); /* Cream scrollbar */
+    background: rgba(255, 251, 222, 0.3);
+    /* Cream scrollbar */
     border-radius: 3px;
 }
 
@@ -182,17 +203,17 @@ option:checked {
 
 .list-group-item {
     /* Cream Glass Background */
-    background: rgba(255, 251, 222, 0.05); 
-    border: 1px solid rgba(255, 251, 222, 0.15); 
+    background: rgba(255, 251, 222, 0.05);
+    border: 1px solid rgba(255, 251, 222, 0.15);
     border-radius: 1rem;
     padding: 1.25rem;
     margin-bottom: 1rem;
     text-align: left;
-    
+
     display: grid;
     grid-template-columns: 1fr auto;
     gap: 0.5rem;
-    
+
     transition: transform 0.2s ease, background 0.2s;
 }
 
@@ -211,7 +232,8 @@ option:checked {
 }
 
 
-#deleteUser:hover, #editUser:hover {
+#deleteUser:hover,
+#editUser:hover {
     background: rgba(255, 251, 222, 0.15);
     transform: translateY(-2px);
     transform: scale(1.2);
@@ -222,7 +244,8 @@ option:checked {
     grid-column: 2;
     grid-row: 1;
     align-self: center;
-    accent-color: var(--secondary); /* Light Teal Checkbox */
+    accent-color: var(--secondary);
+    /* Light Teal Checkbox */
 }
 
 .list-group-item p {
@@ -240,7 +263,8 @@ option:checked {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: var(--secondary); /* Light Teal Category Label */
+    color: var(--secondary);
+    /* Light Teal Category Label */
     margin-top: 0.25rem;
 }
 
@@ -248,19 +272,20 @@ option:checked {
 
 .list-group-item.done {
     opacity: 0.6;
-    background: rgba(9, 107, 104, 0.4); /* Dark Teal Background */
-    border-color: rgba(18, 153, 144, 0.5); 
+    background: rgba(9, 107, 104, 0.4);
+    /* Dark Teal Background */
+    border-color: rgba(18, 153, 144, 0.5);
     transition: all 0.3s ease;
 }
 
 .list-group-item.done h5,
 .list-group-item.done p {
     text-decoration: line-through;
-    color: rgba(255, 251, 222, 0.6); 
+    color: rgba(255, 251, 222, 0.6);
 }
 
 .list-group-item.done input {
-    opacity: 1; 
+    opacity: 1;
 }
 
 /* --- OVERLAY --- */
@@ -277,7 +302,7 @@ option:checked {
     width: 100%;
     height: 100%;
     /* Dark Teal Overlay */
-    background-color: rgba(9, 107, 104, 0.85); 
+    background-color: rgba(9, 107, 104, 0.85);
     backdrop-filter: blur(5px);
     z-index: 10;
     border-radius: 1rem;
@@ -290,15 +315,17 @@ option:checked {
 
 /* Ensure inputs inside overlay match the theme */
 .inputContainer {
-    background-color: rgb(255, 251, 222); /* Cream Box */
-    color: rgb(9, 107, 104); /* Dark Text inside box */
+    background-color: rgb(255, 251, 222);
+    /* Cream Box */
+    color: rgb(9, 107, 104);
+    /* Dark Text inside box */
     /* Add padding/radius if missing in HTML structure */
     padding: 2rem;
     border-radius: 1rem;
 }
 
 /* Style inputs inside the modal to match */
-.inputContainer input, 
+.inputContainer input,
 .inputContainer select {
     background: rgba(144, 209, 202, 0.2);
     border: 1px solid rgb(18, 153, 144);
@@ -307,7 +334,8 @@ option:checked {
     border-radius: 0.5rem;
     width: 100%;
     margin-bottom: 1rem;
-    box-sizing: border-box; /* Fix width issues */
+    box-sizing: border-box;
+    /* Fix width issues */
 }
 
 #logOut {
@@ -316,18 +344,21 @@ option:checked {
     margin-bottom: 2rem;
     top: 2rem;
     left: 2rem;
-    z-index: 5; /* Ensure it's above other elements */
+    z-index: 5;
+    /* Ensure it's above other elements */
 }
-.actionsTd{
+
+.actionsTd {
     display: flex;
     gap: 1rem;
 }
 
-#deleteTask{
+#deleteTask {
     width: fit-content;
     margin-right: 1rem;
     color: var(--surface);
 }
+
 #deleteTask:hover {
     background: rgba(255, 251, 222, 0.15);
     transform: translateY(-2px);
@@ -335,19 +366,85 @@ option:checked {
     border-color: rgba(255, 251, 222, 0.3);
 }
 
-#editTask{
+#editTask {
     width: fit-content;
     margin-right: 1rem;
     color: var(--surface);
 }
+
 #editTask:hover {
     background: rgba(255, 251, 222, 0.15);
     transform: translateY(-2px);
     transform: scale(1.2);
     border-color: rgba(255, 251, 222, 0.3);
 }
-#taskCheckbox{
-    accent-color: var(--secondary); /* Light Teal Checkbox */
+
+#taskCheckbox {
+    accent-color: var(--secondary);
+    /* Light Teal Checkbox */
     transform: scale(1.5);
     cursor: pointer;
+}
+
+/* --- MOBILE RESPONSIVENESS --- */
+@media (max-width: 768px) {
+    .container {
+        padding: 1.5rem;
+        width: 95%;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    p {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    #showTasks {
+        max-height: 60vh;
+    }
+
+    .list-group-item {
+        padding: 1rem;
+    }
+
+    .actions,
+    .task-options {
+        display: flex;
+        flex-direction: row !important;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    .btn {
+        flex: 1;
+        width: auto;
+        text-align: center;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        white-space: nowrap;
+        gap: 0.5rem;
+        padding: 0.5rem;
+    }
+
+    #logOut {
+        top: 1rem;
+        left: 1rem;
+        margin-bottom: 1rem;
+        width: fit-content !important;
+
+    }
+
+    .inputContainer {
+        width: 90%;
+        padding: 1.5rem;
+    }
 }

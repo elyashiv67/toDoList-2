@@ -124,3 +124,26 @@
             color: var(--primary-hover);
             text-decoration: underline;
         }
+
+        /* --- MOBILE RESPONSIVENESS --- */
+        @media (max-width: 768px) {
+            .login-wrapper {
+                padding: 1.5rem;
+                width: 90%;
+                margin: 1rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            p.subtitle {
+                font-size: 0.8rem;
+                margin-bottom: 1.5rem;
+            }
+
+            input, button {
+                padding: 0.6rem;
+                font-size: 0.9rem;
+            }
+        }
