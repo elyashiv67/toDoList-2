@@ -1,34 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/js/all.min.js"></script>
-    <title>categories</title>
-    <link rel="stylesheet" href="../styles.css">
-    <link rel="stylesheet" href="./categories.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/js/all.min.js"></script>
+  <title>categories</title>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="./categories.css">
+  <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
 </head>
+
 <body>
-    <div class="container">
-        <div id="topRow">
-            <a href="../../Home.html" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
-            <h1>Categories Management</h1>
-        <button class="btn btn-primary" onclick="addCategoryShow()">Add Category</button>
-        </div>
-        <div class="inputContainer-overlay-hidden" id="inputContainer" onclick="closeInputContainer(event)">
-          <div class="inputContainer-content">
-              <h2 id="inputTitle">Add New Category</h2>
-              <input type="number" value="" id="categoryID" hidden>
-              <input type="text" id="categoryName" placeholder="Category Name">
-            <button id="addCategoryBtn" class="btn btn-primary" onclick="inputBtnHandler()">Add Category</button>
-          </div>
-        </div>
-        <div id="CategoriesContainer"></div>
+  <div class="container">
+    <div id="topRow">
+      <a href="../../Home.html" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+      <h1>Categories Management</h1>
+      <button class="btn btn-primary" onclick="addCategoryShow()">Add Category</button>
+    </div>
+    <div class="inputContainer-overlay-hidden" id="inputContainer" onclick="closeInputContainer(event)">
+      <div class="inputContainer-content">
+        <h2 id="inputTitle">Add New Category</h2>
+        <input type="number" value="" id="categoryID" hidden>
+        <input type="text" id="categoryName" placeholder="Category Name">
+        <button id="addCategoryBtn" class="btn btn-primary" onclick="inputBtnHandler()">Add Category</button>
+      </div>
+    </div>
+    <div id="CategoriesContainer"></div>
 
 
 
 
-        <script src="./categories.js"></script>
+    <script src="./categories.js"></script>
 </body>
+
 </html>

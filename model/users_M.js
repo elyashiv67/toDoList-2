@@ -4,8 +4,6 @@ const db = require('../config/db_config');
 async function getAll() {
     let sql = 'SELECT id,name,email,user_name,is_admin FROM users';
     let [rows] = await db.query(sql);
-    console.log(rows);
-
     return rows;
 }
 
@@ -24,9 +22,12 @@ async function deleteById(id) {
 }
 
 async function patchUser(id, user) {
-    let keys = Object.keys(user);
+    const allowedKeys = ['name', 'email', 'user_name', 'pass', 'is_admin'];
+    let keys = Object.keys(user).filter(k => allowedKeys.includes(k));
+    if (keys.length === 0) return 0;
+
     console.log(keys);
-    let values = Object.values(user);
+    let values = keys.map(k => user[k]);
     console.log(values);
     let set = keys.map(k => `${k}=?`).join(',');
     let sql = `UPDATE users SET ${set} WHERE id = ?`;

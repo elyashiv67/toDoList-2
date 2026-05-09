@@ -8,10 +8,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/js/all.min.js"></script>
     <link rel="stylesheet" href="./styles.css">
+    <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
 </head>
 
 <body>
-    <div id="logOut" class="btn btn-primary" onclick="deleteCookie('jwt')">log out <i class="fa-solid fa-user-slash"></i></div>
+    <div id="logOut" class="btn btn-primary" onclick="deleteCookie('jwt')">log out <i
+            class="fa-solid fa-user-slash"></i></div>
     <div class="container">
         <h1>ToDo List</h1>
         <div class="actions">
@@ -20,8 +23,10 @@
         </div>
         <div class="task-options">
             <select id="selectCategories">filter categories
-            <option value="0">Select Category</option></select>
-            <div class="btn btn-secondary" onclick="addTaskShow()">add Task<i class="fa-regular fa-square-plus fa-xl"></i></div>
+                <option value="0">Select Category</option>
+            </select>
+            <div class="btn btn-secondary" onclick="addTaskShow()">add Task<i
+                    class="fa-regular fa-square-plus fa-xl"></i></div>
         </div>
         <div id="showTasks"></div>
     </div>

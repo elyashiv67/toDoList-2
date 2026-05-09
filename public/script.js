@@ -1,3 +1,13 @@
+function escapeHTML(str) {
+    if (typeof str !== 'string') return str;
+    return str.replace(/[&<>'"]/g, tag => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        "'": '&#39;',
+        '"': '&quot;'
+    }[tag]));
+}
 
 let allCategories = [];
 let allTasks = [];
@@ -7,8 +17,8 @@ function createTask(task) {
     let doneClass = (task.isDone) ? "done" : "";
     let taskHtml = `
             <li class="list-group-item ${doneClass}">
-                <h5>${task.name}</h5>
-                <p>${task.description}</p>
+                <h5>${escapeHTML(task.name)}</h5>
+                <p>${escapeHTML(task.description)}</p>
                 <input id="taskCheckbox" type="checkbox" ${isDone} onchange="markTaskDone(${task.id}, this.checked)"> 
                 <div>status: ${task.isDone ? "completed" : "in progress"}</div>
                 <div class="actionsTd">
@@ -16,7 +26,7 @@ function createTask(task) {
                 <div id="editTask" onclick="openEditTask(${task.id})"><i class="fa-regular fa-pen-to-square fa-xl"></i></div>
                 </div>
                 
-                <div>category: ${allCategories[task.category_id]?.name || "No Category"}</div>
+                <div>category: ${escapeHTML(allCategories[task.category_id]?.name) || "No Category"}</div>
             </li>
         `;
     return taskHtml;
@@ -77,7 +87,7 @@ function selectCategoryOptions(tagID) {
 
     for (let category of allCategories) {
         if (category) {
-            optionsHTML += `<option value="${category.id}">${category.name}</option>`;
+            optionsHTML += `<option value="${category.id}">${escapeHTML(category.name)}</option>`;
         }
     }
     select.innerHTML = optionsHTML;

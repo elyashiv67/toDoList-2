@@ -27,9 +27,12 @@ async function delete_task(id, user_id) {
 }
 
 async function patchTask(taskId, user_id, task) {
-    let keys = Object.keys(task);
+    const allowedKeys = ['name', 'description', 'isDone', 'category_id'];
+    let keys = Object.keys(task).filter(k => allowedKeys.includes(k));
+    if (keys.length === 0) return 0;
+
     console.log(keys);
-    let values = Object.values(task);
+    let values = keys.map(k => task[k]);
     console.log(values);
     let set = keys.map(k=>`${k}=?`).join(',');
     let sql = `UPDATE tasks SET ${set} WHERE id = ? and user_id = ?`;

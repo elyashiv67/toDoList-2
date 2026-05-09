@@ -1,3 +1,14 @@
+function escapeHTML(str) {
+    if (typeof str !== 'string') return str;
+    return str.replace(/[&<>'"]/g, tag => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        "'": '&#39;',
+        '"': '&quot;'
+    }[tag]));
+}
+
 let allUsers = [];
 
 async function fetchUsers() {
@@ -25,9 +36,9 @@ function renderUsers(users) {
         }
         usersList.innerHTML += `
         <tr>
-            <td>${user.name}</td>
-            <td>${user.user_name}</td>
-            <td>${user.email}</td>
+            <td>${escapeHTML(user.name)}</td>
+            <td>${escapeHTML(user.user_name)}</td>
+            <td>${escapeHTML(user.email)}</td>
             <td>${role}</td>
             <td class="actionsTd">
             <div id="deleteUser" onclick="deleteUser(${user.id})"><i class="fa-regular fa-trash-can fa-xl"></i></div>

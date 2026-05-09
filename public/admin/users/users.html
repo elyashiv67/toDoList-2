@@ -9,32 +9,35 @@
     <script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/js/all.min.js"></script>
     <link rel="stylesheet" href="../../styles.css">
     <link rel="stylesheet" href="./users.css">
+    <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
 </head>
 
 <body>
     <div class="container">
         <div id="topRow">
-           <a href="../../Home.html" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
-           <h1>Users Management</h1>
-           <div id="addUserTopRow" class="btn btn-primary" onclick="addUserShow()">add user <i class="fa-regular fa-square-plus fa-xl"></i></div>
+            <a href="../../Home.html" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+            <h1>Users Management</h1>
+            <div id="addUserTopRow" class="btn btn-primary" onclick="addUserShow()">add user <i
+                    class="fa-regular fa-square-plus fa-xl"></i></div>
         </div>
-        
+
         <div class="inputContainer-overlay-hidden" id="inputContainer" onclick="closeInputContainer(event)">
-        <div class="inputContainer-content">
-            <h2 id="containerTitle">Add New User</h2>
-            <input type="number" value="" id="userID" hidden>
-            <input type="text" id="name" placeholder="your name">
-            <input type="text" id="userName" placeholder="User Name">
-            <input type="text" id="userEmail" placeholder="User Email">
-            <input type="text" id="userPassword" placeholder="User Password">
-            <select id="userRole" required>
-                <option value="">Select Role</option>
-                <option value="1">Admin</option>
-                <option value="0">User</option>
-            </select>
-            <button id="addUserBtn" class="btn btn-primary" onclick="inputBtnHandler()">Add User</button>
+            <div class="inputContainer-content">
+                <h2 id="containerTitle">Add New User</h2>
+                <input type="number" value="" id="userID" hidden>
+                <input type="text" id="name" placeholder="your name">
+                <input type="text" id="userName" placeholder="User Name">
+                <input type="text" id="userEmail" placeholder="User Email">
+                <input type="text" id="userPassword" placeholder="User Password">
+                <select id="userRole" required>
+                    <option value="">Select Role</option>
+                    <option value="1">Admin</option>
+                    <option value="0">User</option>
+                </select>
+                <button id="addUserBtn" class="btn btn-primary" onclick="inputBtnHandler()">Add User</button>
+            </div>
         </div>
-     </div>
 
         <table>
             <thead>
@@ -53,7 +56,7 @@
 
 
 
-        <script src="./users.js"></script>
+    <script src="./users.js"></script>
 </body>
 
 </html>

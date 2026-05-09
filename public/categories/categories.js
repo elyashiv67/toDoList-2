@@ -1,3 +1,14 @@
+function escapeHTML(str) {
+    if (typeof str !== 'string') return str;
+    return str.replace(/[&<>'"]/g, tag => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        "'": '&#39;',
+        '"': '&quot;'
+    }[tag]));
+}
+
 let allCategories = [];
 
 async function fetchUsers() {
@@ -48,7 +59,7 @@ function renderCategories(data) {
         data.forEach(category => {
             if (category) {
                 html += `<div class="category">
-                <h2>${category.name}</h2>
+                <h2>${escapeHTML(category.name)}</h2>
                 <div class="category-actions">
                     <div id="deleteCategory" onclick="deleteCategory(${category.id})"><i class="fa-regular fa-trash-can fa-xl"></i></div>
                 <div id="editCategory" onclick="editCategoryShow(${category.id})"><i class="fa-regular fa-pen-to-square fa-xl"></i></div>
