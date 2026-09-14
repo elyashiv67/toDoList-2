@@ -60,11 +60,12 @@ function createJwt(req, res) {
             { expiresIn: '3h' }
         );
         console.log(token);
+        const isProd = process.env.NODE_ENV === 'production';
         res.cookie('jwt', token, {
             maxAge: 1000 * 60 * 60 * 3,
             httpOnly: true,
-            sameSite: 'none',
-            secure: true
+            sameSite: isProd ? 'none' : 'lax',
+            secure: isProd
         }).status(200).json({ message: "Login successful" });
 
     } catch (err) {
